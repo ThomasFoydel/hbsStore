@@ -1,7 +1,14 @@
 .product-form {
-  width: 20rem;
-  max-width: 90%;
-  margin: auto;
+  width: 45rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.product-form h2 {
+  font-size: 8rem;
+  text-align: center;
+  height: 4rem;
+  color: rgb(29, 29, 29);
 }
 
 .product-item {

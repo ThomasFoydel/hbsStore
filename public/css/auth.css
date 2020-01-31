@@ -1,6 +1,6 @@
 .register-form,
 .login-form {
-  max-width: 30rem;
+  max-width: 45rem;
   margin-left: 50%;
   transform: translateX(-50%);
 }
@@ -8,11 +8,16 @@
 .register-form h2,
 .login-form h2 {
   text-align: center;
+  letter-spacing: 0.7rem;
+  font-size: 8rem;
+  height: 4rem;
+  color: rgb(29, 29, 29);
 }
 
 .register-form .btn,
 .login-form .btn {
-  min-width: 50%;
+  margin-top: 1.2rem;
+  min-width: 75%;
   margin-left: 50%;
   transform: translateX(-50%);
 }

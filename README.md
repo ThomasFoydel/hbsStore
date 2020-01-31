@@ -8,11 +8,11 @@ build out auth flow / login
 -express-session
 -cookies
 
-- user profile info
-  -location
-  -profile picture
-  -crop and minimize
-  -bio
+user profile info
+-location
+-profile picture
+-crop and minimize
+-bio
 
 cart
 
@@ -32,3 +32,7 @@ products
 messages
 -mysql message schema
 -websocket chat ?
+
+search function
+-author
+-title

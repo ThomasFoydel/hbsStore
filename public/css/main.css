@@ -24,6 +24,7 @@ main {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
 }
 
 .main-header__space {
@@ -113,6 +114,11 @@ main {
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0.5rem 0.8rem;
+
+  margin-top: 1.2rem;
+  min-width: 75%;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .btn:hover,
