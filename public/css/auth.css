@@ -9,3 +9,10 @@
 .login-form h2 {
   text-align: center;
 }
+
+.register-form .btn,
+.login-form .btn {
+  min-width: 50%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
