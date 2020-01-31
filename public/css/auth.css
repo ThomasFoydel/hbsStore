@@ -1,0 +1,11 @@
+.register-form,
+.login-form {
+  max-width: 30rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.register-form h2,
+.login-form h2 {
+  text-align: center;
+}
