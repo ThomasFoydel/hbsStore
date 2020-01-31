@@ -3,36 +3,43 @@
 not up and running yet!
 current objectives:
 
-build out auth flow / login
--async helper functions for login.hbs, store jwt in localStorage?
--express-session
--cookies
+### build out auth flow / login
 
-user profile info
--location
--profile picture
--crop and minimize
--bio
+- async helper functions for login.hbs, store jwt in localStorage?
+- express-session
+- cookies
 
-cart
+### user profile info
 
-payment
--stripe
+- location
+- profile picture
+- crop and minimize
+- bio
 
-orders
--order.hbs ==POST==> shopController.postOrder
--send email to artist
--create order in db
--send email to patron
+### cart
 
-products
--add date created or use timestamps
--add author(s)
+### payment
 
-messages
--mysql message schema
--websocket chat ?
+- stripe
 
-search function
--author
--title
+### orders
+
+- order.hbs ==POST==> shopController.postOrder
+- send email to artist
+- create order in db
+- send email to patron
+
+### products
+
+- add date created or use timestamps
+- add author(s)
+
+### messages
+
+- mysql message schema
+- websocket chat ?
+
+### search function
+
+- author
+- title

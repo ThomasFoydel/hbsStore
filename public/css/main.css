@@ -115,10 +115,10 @@ main {
   transition: all 0.2s ease;
   padding: 0.5rem 0.8rem;
 
-  margin-top: 1.2rem;
-  min-width: 75%;
+  /* margin-top: 1.2rem;
+  min-width: 50%;
   margin-left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 }
 
 .btn:hover,

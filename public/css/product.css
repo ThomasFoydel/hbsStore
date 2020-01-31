@@ -31,3 +31,10 @@
 .product__description {
   text-align: center;
 }
+
+.addproduct-button {
+  margin-top: 1.2rem;
+  min-width: 75%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
