@@ -47,8 +47,6 @@ exports.getLogin = (req, res) => {
 };
 
 exports.postLogin = async (req, res) => {
-  // console.log('login REQ BODY: ', req.body.password);
-
   const { email, password } = req.body;
   // const foundUser = await
   User.findByEmail(email).then(async response => {
@@ -73,7 +71,7 @@ exports.postLogin = async (req, res) => {
           id: user.id
         };
         console.log('userInfo: ', userInfo, token);
-        res.status(301).send({
+        res.status(200).send({
           status: 'success',
           message: 'Login successful',
           data: {
