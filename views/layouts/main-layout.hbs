@@ -20,20 +20,49 @@
     <header class="main-header">
         <nav class="main-header__nav">
             <ul class="main-header__item-list">
-                <li class="main-header__item"><a class="{{#if indexActive }}active{{/if}}" href="/">Shop</a></li>
-                <li class="main-header__item"><a class="{{#if activeProducts }}active{{/if}}"
-                        href="/shop/product-list">Products</a></li>
-                <li class="main-header__item"><a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">Cart</a>
-                </li>
 
-                <li class="main-header__item"><a class="{{#if activeAddProduct }}active{{/if}}"
-                        href="/admin/add-product">Add Product</a></li>
-                <li class="main-header__item"><a class="{{#if activeProductList }}active{{/if}}"
-                        href="/admin/products">My Products</a></li>
-                <li class="main-header__item"><a class="{{#if activeRegister }}active{{/if}}"
-                        href="/admin/register">Register</a></li>
-                <li class="main-header__item"><a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">Login</a>
+                <a href="/">
+                    <li class="main-header__item">
+                        <img class="logo" src="/img/logo.svg">
+                    </li>
+                </a>
                 </li>
+                <a class="{{#if indexActive }}active{{/if}}" href="/">
+                    <li class="main-header__item">
+                        Shop
+                    </li>
+                </a>
+                <a class="{{#if activeProducts }}active{{/if}}" href="/shop/product-list">
+                    <li class="main-header__item">
+                        Products
+                    </li>
+                </a>
+                <a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">
+                    <li class="main-header__item">
+                        Cart
+                    </li>
+                </a>
+
+                <a class="{{#if activeAddProduct }}active{{/if}}" href="/admin/add-product">
+                    <li class="main-header__item">
+                        Add Product
+                    </li>
+                </a>
+                <a class="{{#if activeProductList }}active{{/if}}" href="/admin/products">
+                    <li class="main-header__item">
+                        My Products
+                    </li>
+                </a>
+                <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
+                    <li class="main-header__item">
+                        Register
+                    </li>
+                </a>
+                <a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">
+                    <li class="main-header__item">
+                        Login
+                    </li>
+                </a>
             </ul>
         </nav>
 
