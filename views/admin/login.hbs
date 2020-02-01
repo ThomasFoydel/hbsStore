@@ -44,10 +44,11 @@
                     .done(response => {
                         const { id, name, email } = response.data.user;
                         const { token } = response.data;
-                        localStorage.setItem("userId", id);
-                        localStorage.setItem("name", name);
-                        localStorage.setItem("email", email);
-                        localStorage.setItem("token", token);
+                        localStorage.setItem("hbs-userId", id);
+                        localStorage.setItem("hbs-name", name);
+                        localStorage.setItem("hbs-email", email);
+                        localStorage.setItem("hbs-token", token);
+                        localStorage.setItem("hbs-isLoggedIn", true)
                     })
                     .fail(failure => { console.log("login request failed. error: ", failure) });
             })
