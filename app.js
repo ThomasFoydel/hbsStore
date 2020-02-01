@@ -8,6 +8,10 @@ const session = require('express-session');
 const errorController = require('./controllers/404');
 const db = require('./util/database');
 
+require('dotenv').config({
+  path: path.resolve(__dirname.replace('/util', '') + '/.env')
+});
+
 const app = express();
 
 app.engine(
@@ -24,15 +28,16 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-// db.execute('SELECT * FROM products')
-//   .then(res => {
-//     console.log(res[0]);
-//   })
-//   .catch(err => console.log(err));
-
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);

@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const Product = require('../models/product');
 const User = require('../models/user');
 // const auth = require('../middlewares/auth');
+const jwt = require('jsonwebtoken');
 
 const path = require('path');
 require('dotenv').config({
@@ -54,6 +54,13 @@ exports.postLogin = async (req, res) => {
       const user = response[0][0];
       const passwordsMatch = await bcrypt.compare(password, user.password);
       if (passwordsMatch) {
+        // ////// SESSION METHOD /////
+        // req.session.isLoggedIn = true;
+        // req.session.userId = user.id;
+        // req.session.name = user.name;
+        // res.redirect('/');
+        // ///////
+
         const token = jwt.sign(
           {
             tokenUser: {
@@ -64,7 +71,6 @@ exports.postLogin = async (req, res) => {
           process.env.SECRET,
           { expiresIn: '1000hr' }
         );
-
         const userInfo = {
           name: user.name,
           email: user.email,

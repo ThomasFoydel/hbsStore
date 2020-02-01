@@ -6,8 +6,9 @@ current objectives:
 ### build out auth flow / login
 
 - async helper functions for login.hbs, store jwt in localStorage?
-- express-session
-- cookies
+- express-session?
+- cookies?
+- jquery ajax + store jwt in localStorage
 
 ### user profile info
 
