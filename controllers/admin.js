@@ -9,7 +9,7 @@ require('dotenv').config({
 });
 
 exports.getRegister = (req, res) => {
-  const isLoggedIn = req.session;
+  const { isLoggedIn } = req.session;
   if (isLoggedIn) {
     return res.redirect('/');
   } else {
@@ -136,6 +136,7 @@ exports.getAddProduct = (req, res) => {
   const isLoggedIn = req.session;
   if (isLoggedIn) {
     res.render('admin/add-product', {
+      isLoggedIn: isLoggedIn,
       pageTitle: 'Add Product',
       path: '/admin/add-product',
       formsCSS: true,

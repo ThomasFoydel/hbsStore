@@ -59,10 +59,10 @@
 
             {{#if isLoggedIn}}
             <form action="/admin/logout" method="post">
-
-                <li class="main-header__item">
-                    <button type="submit">Logout</button>
-                </li>
+                <button class="logout-button" type="submit">
+                    <li class="main-header__item">
+                        Logout
+                    </li>
                 </button>
             </form>
             {{else}}
@@ -79,7 +79,6 @@
                     </li>
                 </a>
                 {{/if}}
-
 
             </ul>
         </nav>
