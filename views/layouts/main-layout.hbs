@@ -43,6 +43,7 @@
                     </li>
                 </a>
 
+                {{#if isLoggedIn}}
                 <a class="{{#if activeAddProduct }}active{{/if}}" href="/admin/add-product">
                     <li class="main-header__item">
                         Add Product
@@ -53,18 +54,33 @@
                         My Products
                     </li>
                 </a>
-                <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
-                    <li class="main-header__item">
-                        Register
-                    </li>
-                </a>
+                {{/if}}
+            </ul>
+
+            {{#if isLoggedIn}}
+            <form action="/admin/logout" method="post">
+
+                <li class="main-header__item">
+                    <button type="submit">Logout</button>
+                </li>
+                </button>
+            </form>
+            {{else}}
+
+            <ul class="main-header__item-list">
                 <a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">
                     <li class="main-header__item">
                         Login
                     </li>
                 </a>
-                {{!-- <div class="loggedin">logged in status</div>
-                <div id="logout">logout</div> --}}
+                <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
+                    <li class="main-header__item">
+                        Register
+                    </li>
+                </a>
+                {{/if}}
+
+
             </ul>
         </nav>
 

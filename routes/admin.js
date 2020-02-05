@@ -11,6 +11,9 @@ router.get('/login', adminController.getLogin);
 // admin login => POST
 router.post('/login', adminController.postLogin);
 
+// adming logout => POST
+router.post('/logout', adminController.postLogout);
+
 // admin register => GET
 router.get('/register', adminController.getRegister);
 

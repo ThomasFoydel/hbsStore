@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const Product = require('../models/product');
 const User = require('../models/user');
-// const auth = require('../middlewares/auth');
 // const jwt = require('jsonwebtoken');
 
 const path = require('path');
@@ -10,12 +9,18 @@ require('dotenv').config({
 });
 
 exports.getRegister = (req, res) => {
-  res.render('admin/register', {
-    pageTitle: 'Register',
-    path: '/admin/register',
-    formCSS: true,
-    activeRegister: true
-  });
+  const isLoggedIn = req.session;
+  if (isLoggedIn) {
+    return res.redirect('/');
+  } else {
+    res.render('admin/register', {
+      isLoggedIn: false,
+      pageTitle: 'Register',
+      path: '/admin/register',
+      formCSS: true,
+      activeRegister: true
+    });
+  }
 };
 
 exports.postRegister = async (req, res) => {
@@ -38,12 +43,18 @@ exports.postRegister = async (req, res) => {
 };
 
 exports.getLogin = (req, res) => {
-  res.render('admin/login', {
-    pageTitle: 'Login',
-    path: '/admin/login',
-    formCSS: true,
-    activeLogin: true
-  });
+  const { isLoggedIn } = req.session;
+  if (isLoggedIn) {
+    return res.redirect('/');
+  } else {
+    res.render('admin/login', {
+      isLoggedIn: false,
+      pageTitle: 'Login',
+      path: '/admin/login',
+      formCSS: true,
+      activeLogin: true
+    });
+  }
 };
 
 exports.postLogin = async (req, res) => {
@@ -99,23 +110,41 @@ exports.postLogin = async (req, res) => {
   // console.log(foundUser[0]);
 };
 
-exports.getProducts = (req, res) => {
-  res.render('admin/products', {
-    pageTitle: 'Products',
-    path: '/admin/products',
-    productCSS: true,
-    activeProductList: true
+exports.postLogout = (req, res) => {
+  req.session.destroy(err => {
+    if (err) console.log(err);
+    res.redirect('/');
   });
 };
 
+exports.getProducts = (req, res) => {
+  const isLoggedIn = req.session;
+  if (isLoggedIn) {
+    res.render('admin/products', {
+      isLoggedIn: true,
+      pageTitle: 'Products',
+      path: '/admin/products',
+      productCSS: true,
+      activeProductList: true
+    });
+  } else {
+    res.redirect('/admin/login');
+  }
+};
+
 exports.getAddProduct = (req, res) => {
-  res.render('admin/add-product', {
-    pageTitle: 'Add Product',
-    path: '/admin/add-product',
-    formsCSS: true,
-    productCSS: true,
-    activeAddProduct: true
-  });
+  const isLoggedIn = req.session;
+  if (isLoggedIn) {
+    res.render('admin/add-product', {
+      pageTitle: 'Add Product',
+      path: '/admin/add-product',
+      formsCSS: true,
+      productCSS: true,
+      activeAddProduct: true
+    });
+  } else {
+    return res.redirect('/admin/login');
+  }
 };
 
 exports.postAddProduct = (req, res) => {

@@ -70,9 +70,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminRoutes);
 app.use('/shop', shopRoutes);
 app.use('/', (req, res) => {
+  const { isLoggedIn } = req.session;
   db.execute('SELECT * FROM products')
     .then(result => {
       res.render('shop/index', {
+        isLoggedIn: isLoggedIn,
         pageTitle: 'home',
         path: '/',
         indexActive: true,

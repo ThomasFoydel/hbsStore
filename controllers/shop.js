@@ -18,7 +18,9 @@ const db = require('../util/database');
 // };
 
 exports.getCart = (req, res) => {
+  const { isLoggedIn } = req.session;
   res.render('shop/cart', {
+    isLoggedIn: isLoggedIn,
     pageTitle: 'Cart',
     path: '/shop/cart',
     activeCart: true
@@ -26,10 +28,13 @@ exports.getCart = (req, res) => {
 };
 
 exports.getProducts = (req, res, next) => {
+  const { isLoggedIn } = req.session;
+
   db.execute('SELECT * FROM products').then(result => {
     let products = result[0];
     const hasProducts = products ? products.length > 0 : null;
     res.render('shop/product-list', {
+      isLoggedIn: isLoggedIn,
       prods: products,
       pageTitle: 'Shop',
       path: '/shop/product-list',
