@@ -63,11 +63,23 @@
                         Login
                     </li>
                 </a>
+                {{!-- <div class="loggedin">logged in status</div>
+                <div id="logout">logout</div> --}}
             </ul>
         </nav>
 
     </header>
     {{{ body }}}
+    {{!-- <script>
+        const loggedInEl = document.querySelector(".loggedin");
+        const isLoggedIn = localStorage.getItem("hbs-isLoggedIn");
+        loggedInEl.innerHTML = isLoggedIn ? "yep u r logged in" : "oh no ur not!";
+
+        const logoutButton = document.querySelector("#logout");
+        logoutButton.addEventListener("click", function () {
+            localStorage.removeItem("hbs-isLoggedIn");
+        })
+    </script> --}}
 </body>
 
 </html>

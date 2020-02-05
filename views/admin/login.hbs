@@ -16,7 +16,7 @@
 
 <body>
     <main>
-        <form class="login-form" id="login-form" {{!-- action="/admin/login"  --}} method="POST">
+        <form class="login-form" id="login-form" action="/admin/login" method="POST">
             <h2>{{pageTitle}}</h2>
             <div class="form-control">
                 <label for="title">email</label>
@@ -30,7 +30,7 @@
         </form>
     </main>
 
-    <script>
+    {{!-- <script>
         $(document).ready(() => {
             document.getElementById("login-form").addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -53,7 +53,7 @@
                     .fail(failure => { console.log("login request failed. error: ", failure) });
             })
         })
-    </script>
+    </script> --}}
 </body>
 
 </html>

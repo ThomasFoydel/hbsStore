@@ -60,34 +60,34 @@ exports.postLogin = async (req, res) => {
         // req.session.name = user.name;
         // res.redirect('/');
         // ///////
-
-        const token = jwt.sign(
-          {
-            tokenUser: {
-              userId: user.id,
-              email: user.email
-            }
-          },
-          process.env.SECRET,
-          { expiresIn: '1000hr' }
-        );
-        const userInfo = {
-          name: user.name,
-          email: user.email,
-          id: user.id
-        };
-        console.log('userInfo: ', userInfo, token);
-        res.status(200).send({
-          status: 'success',
-          message: 'Login successful',
-          data: {
-            user: userInfo,
-            token
-          },
-          headers: {
-            'x-auth-token': token
-          }
-        });
+        // // // // jwt method   // // // //
+        // const token = jwt.sign(
+        //   {
+        //     tokenUser: {
+        //       userId: user.id,
+        //       email: user.email
+        //     }
+        //   },
+        //   process.env.SECRET,
+        //   { expiresIn: '1000hr' }
+        // );
+        // const userInfo = {
+        //   name: user.name,
+        //   email: user.email,
+        //   id: user.id
+        // };
+        // console.log('userInfo: ', userInfo, token);
+        // res.status(200).send({
+        //   status: 'success',
+        //   message: 'Login successful',
+        //   data: {
+        //     user: userInfo,
+        //     token
+        //   },
+        //   headers: {
+        //     'x-auth-token': token
+        //   }
+        // });
       } else {
         return res.json({ err: 'Incorrect password' });
       }

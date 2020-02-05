@@ -5,10 +5,9 @@ current objectives:
 
 ### build out auth flow / login
 
-- async helper functions for login.hbs, store jwt in localStorage?
-- express-session?
-- cookies?
-- jquery ajax + store jwt in localStorage
+- auth flow that used ajax call to fetch jwt and store jwt in localStorage seemed to go against MVC pattern, which is supposed to be the spirit of this project
+- switch to express-session instead
+- store sessions in Google Cloud MySQL
 
 ### user profile info
 
