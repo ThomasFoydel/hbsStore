@@ -33,7 +33,9 @@
                     <p class="product__description">{{description}}</p>
                 </div>
                 <div class="card__actions">
-                    <button class="btn">Add to Cart</button>
+                    <form action="/shop/add-to-cart/{{id}}" method="POST">
+                        <button class="btn" type="submit">Add to Cart</button>
+                    </form>
                 </div>
             </article>
             {{/each}}

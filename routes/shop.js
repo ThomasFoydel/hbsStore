@@ -8,4 +8,6 @@ router.get('/cart', shopController.getCart);
 
 router.get('/product-list', shopController.getProducts);
 
+router.post('/add-to-cart/:productid', shopController.addToCart);
+
 module.exports = router;
