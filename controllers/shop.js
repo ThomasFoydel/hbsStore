@@ -2,22 +2,6 @@ const db = require('../util/database');
 const Product = require('../models/product');
 const CartItem = require('../models/cartItem');
 
-// exports.getAddProduct = (req, res, next) => {
-//   res.render('admin/add-product', {
-//     pageTitle: 'Add Product',
-//     path: '/admin/add-product',
-//     formsCSS: true,
-//     productCSS: true,
-//     activeAddProduct: true
-//   });
-// };
-
-// exports.postAddProduct = (req, res, next) => {
-//   const product = new Product(req.body.title);
-//   product.save();
-//   res.redirect('/');
-// };
-
 exports.getCart = async (req, res) => {
   const { isLoggedIn, userId } = req.session;
   const response = await CartItem.findByUser(userId);
@@ -35,14 +19,17 @@ exports.getCart = async (req, res) => {
       let filteredCart = quantifiedCart.filter(element => {
         return element.product === item.product;
       });
+
       let alreadyExistingItem = filteredCart[0];
+
       let newQuantity = alreadyExistingItem.quantity + 1;
       let itemWithNewQuantity = {
         product: item.product,
         quantity: newQuantity
       };
-      let arrayWithoutNewItem = quantifiedCart.filter(item => {
-        return item.product !== item.product;
+
+      let arrayWithoutNewItem = quantifiedCart.filter(i => {
+        return i.product !== item.product;
       });
       let updatedQuantifiedCart = [...arrayWithoutNewItem, itemWithNewQuantity];
       quantifiedCart = updatedQuantifiedCart;

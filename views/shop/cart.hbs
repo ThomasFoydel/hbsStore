@@ -15,12 +15,18 @@
     <h1>cart</h1>
     <h1>cart</h1>
     <h1>cart</h1>
-    <h1>cart</h1>
-    <h1>cart</h1>
-    {{#each cartItems}}
-    <p>{{title}}</p>
-    <p>quantity: {{quantity}}</p>
-    {{/each}}
+
+    <div class="cart">
+        {{#each cartItems}}
+        <div class="cart-item">
+            <p>{{title}}</p>
+            <p>quantity: {{quantity}}</p>
+            <p>price: {{price}}</p>
+            <p>description: {{description}}</p>
+            <img src={{imageUrl}} class="cart-item-img">
+        </div>
+        {{/each}}
+    </div>
 
 </body>
 
