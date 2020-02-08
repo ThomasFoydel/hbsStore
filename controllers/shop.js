@@ -19,6 +19,7 @@ exports.getCart = async (req, res) => {
     });
   }
 
+  // cart is not empty. determine quantities:
   // get quantity of each item from usercart
   let productsSoFar = [];
   let quantifiedCart = [];
@@ -26,7 +27,13 @@ exports.getCart = async (req, res) => {
   userCart.forEach(item => {
     if (productsSoFar.indexOf(item.product) === -1) {
       productsSoFar.push(item.product);
-      quantifiedCart.push({ product: item.product, quantity: 1, id: item.id });
+      quantifiedCart.push({
+        id: item.id,
+        product: item.product,
+        price: item.price,
+        imageUrl: item.imageUrl,
+        quantity: 1
+      });
     } else {
       let filteredCart = quantifiedCart.filter(element => {
         return element.product === item.product;
@@ -36,6 +43,8 @@ exports.getCart = async (req, res) => {
       let itemWithNewQuantity = {
         id: item.id,
         product: item.product,
+        price: item.price,
+        imageUrl: item.imageUrl,
         quantity: newQuantity
       };
       let arrayWithoutNewItem = quantifiedCart.filter(i => {
@@ -46,47 +55,23 @@ exports.getCart = async (req, res) => {
     }
   });
 
-  let cartWithDetails = [];
-
-  async function detailGetter() {
-    quantifiedCart.forEach(item => {
-      async function getDetails() {
-        let foundItem = await Product.findById(item.product);
-        let { title, price, description, imageUrl } = foundItem[0][0];
-        let itemWithDetails = {
-          id: item.id,
-          title,
-          price,
-          description,
-          imageUrl,
-          quantity: item.quantity,
-          productId: item.product
-        };
-        cartWithDetails.push(itemWithDetails);
-      }
-
-      async function returnAfterPushing() {
-        await getDetails();
-
-        if (quantifiedCart.indexOf(item) === quantifiedCart.length - 1) {
-          res.render('shop/cart', {
-            isLoggedIn: isLoggedIn,
-            pageTitle: 'Cart',
-            path: '/shop/cart',
-            activeCart: true,
-            hasItems: true,
-            cartItems: cartWithDetails
-          });
-        }
-      }
-      returnAfterPushing();
-    });
-  }
-  detailGetter();
+  res.render('shop/cart', {
+    isLoggedIn: isLoggedIn,
+    pageTitle: 'Cart',
+    path: '/shop/cart',
+    activeCart: true,
+    hasItems: true,
+    cartItems: quantifiedCart
+  });
 };
 
 exports.addToCart = (req, res) => {
-  const newCartItem = new CartItem(req.params.productid, req.session.userId);
+  const newCartItem = new CartItem(
+    req.params.productid,
+    req.session.userId,
+    req.query.price,
+    req.query.imageUrl
+  );
   newCartItem
     .save()
     .then(result => {

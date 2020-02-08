@@ -1,5 +1,12 @@
 .cart {
   /* display: grid; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  width: 80vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .cart-item {

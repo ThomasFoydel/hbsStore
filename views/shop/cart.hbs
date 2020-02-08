@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{pageTitle}}</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/cart.css" </head> <body>
+    {{!-- <link rel="stylesheet" href="/css/main.css"> --}}
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+
+<body>
 
     {{#if hasItems}}
     <div class="cart">
         {{#each cartItems}}
         <div class="cart-item">
-            <p>{{title}}</p>
+            <h2>{{title}}</h2>
+
+            <img src={{imageUrl}} class="cart-item-img">
             <p>quantity: {{quantity}}</p>
             <p>price: {{price}}</p>
-            <p>description: {{description}}</p>
-            <img src={{imageUrl}} class="cart-item-img">
 
             <form action="/shop/remove-from-cart/{{id}}" method="POST" class="cart-removebutton">
                 <button class="btn" type="submit">remove</button>
@@ -31,6 +34,6 @@
     <h1>your cart is empty</h1>
     {{/if}}
 
-    </body>
+</body>
 
 </html>
