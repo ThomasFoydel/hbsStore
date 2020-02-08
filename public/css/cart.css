@@ -1,0 +1,15 @@
+.cart {
+  /* display: grid; */
+}
+
+.cart-item {
+  text-align: center;
+  width: 20rem;
+  height: 25rem;
+  background: rgb(249, 249, 249);
+}
+
+.cart-item-img {
+  width: 10rem;
+  max-height: 12rem;
+}

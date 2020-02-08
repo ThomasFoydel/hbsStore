@@ -7,6 +7,18 @@ exports.getCart = async (req, res) => {
   const response = await CartItem.findByUser(userId);
   const userCart = response[0];
 
+  if (JSON.stringify(userCart) === JSON.stringify([])) {
+    // cart is empty
+    return res.render('shop/cart', {
+      isLoggedIn: isLoggedIn,
+      pageTitle: 'Cart',
+      path: '/shop/cart',
+      activeCart: true,
+      hasItems: false,
+      cartItems: []
+    });
+  }
+
   // get quantity of each item from usercart
   let productsSoFar = [];
   let quantifiedCart = [];
@@ -14,20 +26,18 @@ exports.getCart = async (req, res) => {
   userCart.forEach(item => {
     if (productsSoFar.indexOf(item.product) === -1) {
       productsSoFar.push(item.product);
-      quantifiedCart.push({ product: item.product, quantity: 1 });
+      quantifiedCart.push({ product: item.product, quantity: 1, id: item.id });
     } else {
       let filteredCart = quantifiedCart.filter(element => {
         return element.product === item.product;
       });
-
       let alreadyExistingItem = filteredCart[0];
-
       let newQuantity = alreadyExistingItem.quantity + 1;
       let itemWithNewQuantity = {
+        id: item.id,
         product: item.product,
         quantity: newQuantity
       };
-
       let arrayWithoutNewItem = quantifiedCart.filter(i => {
         return i.product !== item.product;
       });
@@ -44,6 +54,7 @@ exports.getCart = async (req, res) => {
         let foundItem = await Product.findById(item.product);
         let { title, price, description, imageUrl } = foundItem[0][0];
         let itemWithDetails = {
+          id: item.id,
           title,
           price,
           description,
@@ -56,12 +67,14 @@ exports.getCart = async (req, res) => {
 
       async function returnAfterPushing() {
         await getDetails();
+
         if (quantifiedCart.indexOf(item) === quantifiedCart.length - 1) {
           res.render('shop/cart', {
             isLoggedIn: isLoggedIn,
             pageTitle: 'Cart',
             path: '/shop/cart',
             activeCart: true,
+            hasItems: true,
             cartItems: cartWithDetails
           });
         }
@@ -98,4 +111,15 @@ exports.getProducts = (req, res, next) => {
       productCSS: true
     });
   });
+};
+
+exports.removeFromCart = (req, res) => {
+  const { cartitemid } = req.params;
+  db.execute('DELETE FROM cartItems WHERE id = ?', [cartitemid])
+    .then(result => {
+      res.redirect('/shop/cart');
+    })
+    .catch(err => {
+      console.log('delete operation error. error message: ', err);
+    });
 };

@@ -7,15 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{pageTitle}}</title>
     <link rel="stylesheet" href="/css/main.css">
-</head>
+    <link rel="stylesheet" href="/css/cart.css" </head> <body>
 
-<body>
-
-    <h1>cart</h1>
-    <h1>cart</h1>
-    <h1>cart</h1>
-    <h1>cart</h1>
-
+    {{#if hasItems}}
     <div class="cart">
         {{#each cartItems}}
         <div class="cart-item">
@@ -24,10 +18,19 @@
             <p>price: {{price}}</p>
             <p>description: {{description}}</p>
             <img src={{imageUrl}} class="cart-item-img">
+
+            <form action="/shop/remove-from-cart/{{id}}" method="POST" class="cart-removebutton">
+                <button class="btn" type="submit">remove</button>
+            </form>
+
+
         </div>
         {{/each}}
     </div>
+    {{else}}
+    <h1>your cart is empty</h1>
+    {{/if}}
 
-</body>
+    </body>
 
 </html>
