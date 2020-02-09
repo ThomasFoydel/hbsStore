@@ -1,18 +1,24 @@
 const db = require('../util/database');
 
 module.exports = class Order {
-  constructor(c, s, pri, pro, d, q) {
+  constructor(c, s, p1, p2, d, q) {
     this.customer = c;
     this.seller = s;
-    this.price = pri;
-    this.product = pro;
+    this.price = p1;
+    this.productid = p2;
     this.date = d;
     this.quantity = q;
   }
   save() {
     return db.execute(
       'INSERT INTO orders (customer, seller, price, product, date) VALUES (?,?,?,?,?,?)',
-      [this.customer, this.seller, this.price, this.product, this.date]
+      [
+        this.customer,
+        this.seller,
+        this.price,
+        { productid: this.productid, quantity: this.quantity },
+        this.date
+      ]
     );
   }
   static fetchAll() {
@@ -33,3 +39,13 @@ module.exports = class Order {
     return db.execute('SELECT * FROM orders WHERE orders.id = ?', [id]);
   }
 };
+
+// const order = {
+//   seller: 1,
+//   customer: 4,
+//   product: {
+//     productid: 4,
+//     quantity: 3
+//   },
+//   price: 45
+// };

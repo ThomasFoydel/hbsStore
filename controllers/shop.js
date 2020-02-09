@@ -2,6 +2,7 @@ const db = require('../util/database');
 const Product = require('../models/product');
 const CartItem = require('../models/cartItem');
 const Order = require('../models/order');
+const { quantifyCart } = require('./util');
 
 exports.getCart = async (req, res) => {
   const { isLoggedIn, userId } = req.session;
@@ -22,41 +23,11 @@ exports.getCart = async (req, res) => {
 
   // cart is not empty. determine quantities:
   // get quantity of each item from usercart
-  let productsSoFar = [];
-  let quantifiedCart = [];
 
-  userCart.forEach(item => {
-    if (productsSoFar.indexOf(item.product) === -1) {
-      productsSoFar.push(item.product);
-      quantifiedCart.push({
-        id: item.id,
-        product: item.product,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        seller: item.seller,
-        quantity: 1
-      });
-    } else {
-      let filteredCart = quantifiedCart.filter(element => {
-        return element.product === item.product;
-      });
-      let alreadyExistingItem = filteredCart[0];
-      let newQuantity = alreadyExistingItem.quantity + 1;
-      let itemWithNewQuantity = {
-        id: item.id,
-        product: item.product,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        seller: item.seller,
-        quantity: newQuantity
-      };
-      let arrayWithoutNewItem = quantifiedCart.filter(i => {
-        return i.product !== item.product;
-      });
-      let updatedQuantifiedCart = [...arrayWithoutNewItem, itemWithNewQuantity];
-      quantifiedCart = updatedQuantifiedCart;
-    }
-  });
+  // let productsSoFar = [];
+  // let quantifiedCart = [];
+  const quantifiedCart = quantifyCart(userCart);
+  console.log('quantifiedCart: ', quantifiedCart);
 
   res.render('shop/cart', {
     isLoggedIn: isLoggedIn,
@@ -123,18 +94,24 @@ exports.checkout = async (req, res) => {
   let fullOrderObject = {};
   let mostRecentOrder;
 
+  // need to quantize cart first
+
   userCart.forEach(item => {
     if (item.seller !== mostRecentSeller) {
+      // new seller
       mostRecentSeller = item.seller;
-      console.log('item: ', item);
+      console.log('item is new seller: ', item);
+      // const newItem = {item.}
       fullOrderObject[item.seller] = item;
 
-      console.log('fullOrderObject: ', fullOrderObject);
+      // console.log('fullOrderObject: ', fullOrderObject);
       // iterate thru cart, if item.seller not most recent,
       // make new array on fullOrderObject and set mostRecent to current
       // if item.seller is same as most recent seller, push to current array
       // and increase count
       // when object is fully built, iterate through, create one order per seller
+    } else {
+      console.log('item is previous seller: ', item.seller);
     }
   });
 
