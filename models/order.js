@@ -1,12 +1,13 @@
 const db = require('../util/database');
 
 module.exports = class Order {
-  constructor(c, s, pri, pro, d) {
+  constructor(c, s, pri, pro, d, q) {
     this.customer = c;
     this.seller = s;
     this.price = pri;
     this.product = pro;
     this.date = d;
+    this.quantity = q;
   }
   save() {
     return db.execute(

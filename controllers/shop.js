@@ -74,7 +74,7 @@ exports.addToCart = (req, res) => {
     req.session.userId,
     req.query.price,
     req.query.imageUrl,
-    req.query.seller
+    req.query.author
   );
   newCartItem
     .save()
@@ -118,9 +118,33 @@ exports.checkout = async (req, res) => {
   const response = await CartItem.findByUser(userId);
   const userCart = response[0];
 
-  console.log();
+  // sort cartitems by seller,
+  let mostRecentSeller = '';
+  let fullOrderObject = {};
+  let mostRecentOrder;
 
-  const order = new Order({
-    // seller, customer, price,
+  userCart.forEach(item => {
+    if (item.seller !== mostRecentSeller) {
+      mostRecentSeller = item.seller;
+      console.log('item: ', item);
+      fullOrderObject[item.seller] = item;
+
+      console.log('fullOrderObject: ', fullOrderObject);
+      // iterate thru cart, if item.seller not most recent,
+      // make new array on fullOrderObject and set mostRecent to current
+      // if item.seller is same as most recent seller, push to current array
+      // and increase count
+      // when object is fully built, iterate through, create one order per seller
+    }
   });
+
+  // order
+
+  // const order = new Order(userId,seller,  );
 };
+
+// this.customer = c;
+// this.seller = s;
+// this.price = pri;
+// this.product = pro;
+// this.date = d;
