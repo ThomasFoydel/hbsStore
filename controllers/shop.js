@@ -1,6 +1,7 @@
 const db = require('../util/database');
 const Product = require('../models/product');
 const CartItem = require('../models/cartItem');
+const Order = require('../models/order');
 
 exports.getCart = async (req, res) => {
   const { isLoggedIn, userId } = req.session;
@@ -32,6 +33,7 @@ exports.getCart = async (req, res) => {
         product: item.product,
         price: item.price,
         imageUrl: item.imageUrl,
+        seller: item.seller,
         quantity: 1
       });
     } else {
@@ -45,6 +47,7 @@ exports.getCart = async (req, res) => {
         product: item.product,
         price: item.price,
         imageUrl: item.imageUrl,
+        seller: item.seller,
         quantity: newQuantity
       };
       let arrayWithoutNewItem = quantifiedCart.filter(i => {
@@ -70,7 +73,8 @@ exports.addToCart = (req, res) => {
     req.params.productid,
     req.session.userId,
     req.query.price,
-    req.query.imageUrl
+    req.query.imageUrl,
+    req.query.seller
   );
   newCartItem
     .save()
@@ -107,4 +111,16 @@ exports.removeFromCart = (req, res) => {
     .catch(err => {
       console.log('delete operation error. error message: ', err);
     });
+};
+
+exports.checkout = async (req, res) => {
+  const { isLoggedIn, userId } = req.session;
+  const response = await CartItem.findByUser(userId);
+  const userCart = response[0];
+
+  console.log();
+
+  const order = new Order({
+    // seller, customer, price,
+  });
 };

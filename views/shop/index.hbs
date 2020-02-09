@@ -33,7 +33,8 @@
                     <p class="product__description">{{description}}</p>
                 </div>
                 <div class="card__actions">
-                    <form action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}" method="POST">
+                    <form action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&seller={{seller}}"
+                        method="POST">
                         <button class="btn" type="submit">Add to Cart</button>
                     </form>
                 </div>

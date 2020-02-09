@@ -150,9 +150,8 @@ exports.getAddProduct = (req, res) => {
 
 exports.postAddProduct = (req, res) => {
   const { title, price, imageUrl, description } = req.body;
-
-  console.log(title, price, imageUrl, description);
-  const product = new Product(title, price, description, imageUrl);
+  const { userId } = req.session;
+  const product = new Product(title, price, description, imageUrl, userId);
   product.save().then(result => {
     res.redirect('/');
   });

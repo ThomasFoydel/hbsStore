@@ -30,6 +30,11 @@
         </div>
         {{/each}}
     </div>
+    <div class="checkout-container">
+        <form class="checkout" action="/shop/checkout" method="POST">
+            <button type="submit" class="btn checkout-button">check out</button>
+        </form>
+    </div>
     {{else}}
     <h1>your cart is empty</h1>
     {{/if}}

@@ -12,4 +12,6 @@ router.post('/add-to-cart/:productid', shopController.addToCart);
 
 router.post('/remove-from-cart/:cartitemid', shopController.removeFromCart);
 
+router.post('/checkout', shopController.checkout);
+
 module.exports = router;
