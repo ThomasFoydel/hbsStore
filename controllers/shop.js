@@ -27,7 +27,6 @@ exports.getCart = async (req, res) => {
   // let productsSoFar = [];
   // let quantifiedCart = [];
   const quantifiedCart = quantifyCart(userCart);
-  console.log('quantifiedCart: ', quantifiedCart);
 
   res.render('shop/cart', {
     isLoggedIn: isLoggedIn,
@@ -96,27 +95,76 @@ exports.checkout = async (req, res) => {
 
   // need to quantize cart first
 
-  userCart.forEach(item => {
+  const quantifiedCart = quantifyCart(userCart);
+  // console.log('quantifiedCart:  ', quantifiedCart);
+  quantifiedCart.forEach((item, i) => {
+    // console.log('I  ', i, 'item: ', item);
+
     if (item.seller !== mostRecentSeller) {
       // new seller
+      console.log(
+        'item seller: ',
+        item.seller,
+        'most recent seller: ',
+        mostRecentSeller
+      );
       mostRecentSeller = item.seller;
-      console.log('item is new seller: ', item);
+      // console.log('############');
+      // console.log('item is from new seller. item: ', item);
+      // console.log('############');
       // const newItem = {item.}
-      fullOrderObject[item.seller] = item;
+      fullOrderObject[item.seller] = {
+        // ...fullOrderObject[item.seller],
+        count: 1,
+        products: [
+          {
+            ...item,
+            price: item.price * item.quantity
+          }
+        ]
+      };
 
-      // console.log('fullOrderObject: ', fullOrderObject);
       // iterate thru cart, if item.seller not most recent,
       // make new array on fullOrderObject and set mostRecent to current
-      // if item.seller is same as most recent seller, push to current array
-      // and increase count
+
       // when object is fully built, iterate through, create one order per seller
+      // MAKE SURE to calculate price (quantity * price)
     } else {
-      console.log('item is previous seller: ', item.seller);
+      // item.seller is most recent seller
+      // push to current array
+      // and increase count
+      // console.log('Item is previous seller. item: ', item);
+      //
+      //
+      console.log('111: ', fullOrderObject[item.seller].products);
+      console.log('item.products: ', item.products);
+      // fullOrderObject[item.seller].products.push({
+      //   count: item.count,
+      //   products: item.products
+      // });
+      // fullOrderObject[item.seller].count =
+      //   fullOrderObject[item.seller].count + 1;
+      //
+      //
+      // fullOrderObject[item.seller] = {
+      //   ...item,
+      // // update this seller, with the key of the existing item array
+      // // put this item on that array
+      // };
+      // console.log('item is previous seller: ', item.seller);
     }
   });
 
   // order
+  console.log('############');
+  console.log('############');
+  console.log('############');
+  console.log('############');
+  console.log('############');
 
+  console.log('fullOrderObject: ', fullOrderObject);
+
+  // console.log('fullOrderObject: ', fullOrderObject['1'].products);
   // const order = new Order(userId,seller,  );
 };
 
@@ -125,3 +173,46 @@ exports.checkout = async (req, res) => {
 // this.price = pri;
 // this.product = pro;
 // this.date = d;
+
+const separateProductsWithQuantity = [
+  {
+    id: 42,
+    product: 8,
+    price: 89779079,
+    imageUrl:
+      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone11-red-select-2019?wid=940',
+    seller: 1,
+    quantity: 1
+  },
+  {
+    id: 43,
+    product: 7,
+    price: 10,
+    imageUrl:
+      'https://pics.me.me/im-boo-boo-the-fool-im-boo-boo-the-fucking-49773182.png',
+    seller: 1,
+    quantity: 3
+  }
+];
+
+const separateOrdersWithTotalPrice = [
+  {
+    seller: 1,
+    totalPrice: 34,
+    products: [{}, {}]
+  },
+  {
+    seller: 4,
+    totalPrice: 34,
+    products: [{}, {}]
+  }
+];
+
+const simpleModelOfSeparatedIntoOrders = {
+  sellerId1: [{ product1: 1 }, { product2: 2 }],
+  sellerId2: [{ product: 2 }, { product2: 2 }]
+};
+
+const currentObject = {
+  sellerId1: { count: 1, products: [] }
+};

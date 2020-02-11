@@ -1,5 +1,5 @@
 {
-  "name": "hbsStore",
+  "name": "hbsstore",
   "version": "1.0.0",
   "description": "A store to sell art on",
   "main": "app.js",
