@@ -132,26 +132,23 @@ exports.checkout = async (req, res) => {
   }
 
   asyncForEach(fullOrderArray, async orderObject => {
-    const { seller, totalPrice, quantifiedProducts } = orderObject;
+    const { seller, totalPrice, quantifiedProducts, customer } = orderObject;
 
     // const newOrder = new Order()
 
-    // const orderObject = {
-    //   customer: 3,
-    //   seller: 1,
-    //   price: 2292,
-    //   seller: 4,
-    //   products: [
-    //     /*json array object here? */
-    //   ],
-    //   date: 109129287298
-    // };
+    const newOrder = new Order(
+      req.session.userId,
+      seller,
+      totalPrice,
+      JSON.stringify(quantifiedProducts),
+      'pending'
+    );
 
-    // console.log('new order: ', newOrder);
-    // newOrder
-    //   .save()
-    //   .then(result => console.log('result: ', result))
-    //   .catch(err => console.log('err: ', err));
+    console.log('new order: ', newOrder);
+    newOrder
+      .save()
+      .then(result => console.log('result: ', result))
+      .catch(err => console.log('err: ', err));
   });
 };
 

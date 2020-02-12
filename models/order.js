@@ -1,17 +1,17 @@
 const db = require('../util/database');
 
 module.exports = class Order {
-  constructor(c, s, t, p, d) {
+  constructor(c, s, t, p, st) {
     this.customer = c;
     this.seller = s;
     this.totalPrice = t;
     this.products = p;
-    this.date = d;
+    this.status = st;
   }
   save() {
     return db.execute(
-      'INSERT INTO orders (customer, seller, price, products, date) VALUES (?,?,?,?,?)',
-      [this.customer, this.seller, this.totalPrice, this.products, this.date]
+      'INSERT INTO orders (customer, seller, price, products, status) VALUES (?,?,?,?,?)',
+      [this.customer, this.seller, this.totalPrice, this.products, this.status]
     );
   }
   static fetchAll() {

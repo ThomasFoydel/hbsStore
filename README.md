@@ -27,8 +27,7 @@ current objectives:
 
 ### orders
 
-- checkout
-- create order in db
+- fix totalprice calculation
 - send email to artist (nodemailer?)
 - send email to patron
 
