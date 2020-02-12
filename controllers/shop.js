@@ -90,20 +90,17 @@ exports.checkout = async (req, res) => {
 
   // sort cartitems by seller,
   let mostRecentSeller = '';
-  let fullOrderObject = [];
+  let fullOrderArray = [];
   let mostRecentOrder;
 
-  // need to quantize cart first
-
   const quantifiedCart = quantifyCart(userCart);
-  // console.log('quantifiedCart:  ', quantifiedCart);
-  quantifiedCart.forEach((item, i) => {
-    // console.log('I  ', i, 'item: ', item);
 
+  quantifiedCart.forEach((item, i) => {
     if (item.seller !== mostRecentSeller) {
       mostRecentSeller = item.seller;
 
-      fullOrderObject.push({
+      fullOrderArray.push({
+        customer: item.customer,
         seller: item.seller,
         count: 1,
         totalPrice: item.price * item.quantity,
@@ -111,12 +108,12 @@ exports.checkout = async (req, res) => {
       });
 
       // iterate thru cart, if item.seller not most recent,
-      // make new array on fullOrderObject and set mostRecent to current
+      // make new array on fullOrderArray and set mostRecent to current
 
       // when object is fully built, iterate through, create one order per seller
       // MAKE SURE to calculate price (quantity * price)
     } else {
-      const existingOrderInArrayForm = fullOrderObject.filter(
+      const existingOrderInArrayForm = fullOrderArray.filter(
         order => order.seller === item.seller
       );
       const existingOrder = existingOrderInArrayForm[0];
@@ -128,30 +125,42 @@ exports.checkout = async (req, res) => {
     }
   });
 
-  // order
-  console.log('############');
-  console.log('############');
-  console.log('############');
-  console.log('############');
-  console.log('############');
-
-  // console.log('fullOrderObject: ', fullOrderObject);
-
   async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
       await callback(array[index], index, array);
     }
   }
 
-  asyncForEach(fullOrderObject, async order => {
-    console.log('ORDER: ', order);
+  asyncForEach(fullOrderArray, async orderObject => {
+    const { seller, totalPrice, quantifiedProducts } = orderObject;
+
+    // const newOrder = new Order()
+
+    // const orderObject = {
+    //   customer: 3,
+    //   seller: 1,
+    //   price: 2292,
+    //   seller: 4,
+    //   products: [
+    //     /*json array object here? */
+    //   ],
+    //   date: 109129287298
+    // };
+
+    // console.log('new order: ', newOrder);
+    // newOrder
+    //   .save()
+    //   .then(result => console.log('result: ', result))
+    //   .catch(err => console.log('err: ', err));
   });
-
-  // console.log('PROCCESS: ', fullOrderObject);
-
-  // console.log('fullOrderObject: ', fullOrderObject['1'].products);
-  // const order = new Order(userId,seller,  );
 };
+
+// this.customer = c;
+// this.seller = s;
+// this.price = p1;
+// this.productid = p2;
+// this.date = d;
+// this.quantity = q;
 
 // this.customer = c;
 // this.seller = s;
@@ -205,4 +214,15 @@ const arrayVersion = [
 
 const currentObject = {
   sellerId1: { count: 1, products: [] }
+};
+
+const orderObject = {
+  customer: 3,
+  seller: 1,
+  price: 2292,
+  seller: 4,
+  products: [
+    /*json array object here? */
+  ],
+  date: 109129287298
 };

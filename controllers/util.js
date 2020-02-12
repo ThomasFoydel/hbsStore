@@ -3,10 +3,12 @@ exports.quantifyCart = function(cart) {
   let quantifiedCart = [];
 
   cart.forEach(item => {
+    // console.log('ITEM!!!!!: ', item);
     if (productsSoFar.indexOf(item.product) === -1) {
       productsSoFar.push(item.product);
       quantifiedCart.push({
         id: item.id,
+        customer: item.customer,
         product: item.product,
         price: item.price,
         imageUrl: item.imageUrl,
@@ -22,6 +24,7 @@ exports.quantifyCart = function(cart) {
       let newQuantity = alreadyExistingItem.quantity + 1;
       let itemWithNewQuantity = {
         id: item.id,
+        customer: item.customer,
         product: item.product,
         price: item.price,
         imageUrl: item.imageUrl,
