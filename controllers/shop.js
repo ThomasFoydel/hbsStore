@@ -90,7 +90,7 @@ exports.checkout = async (req, res) => {
 
   // sort cartitems by seller,
   let mostRecentSeller = '';
-  let fullOrderObject = {};
+  let fullOrderObject = [];
   let mostRecentOrder;
 
   // need to quantize cart first
@@ -101,28 +101,14 @@ exports.checkout = async (req, res) => {
     // console.log('I  ', i, 'item: ', item);
 
     if (item.seller !== mostRecentSeller) {
-      // new seller
-      console.log(
-        'item seller: ',
-        item.seller,
-        'most recent seller: ',
-        mostRecentSeller
-      );
       mostRecentSeller = item.seller;
-      // console.log('############');
-      // console.log('item is from new seller. item: ', item);
-      // console.log('############');
-      // const newItem = {item.}
-      fullOrderObject[item.seller] = {
-        // ...fullOrderObject[item.seller],
+
+      fullOrderObject.push({
+        seller: item.seller,
         count: 1,
-        products: [
-          {
-            ...item,
-            price: item.price * item.quantity
-          }
-        ]
-      };
+        totalPrice: item.price * item.quantity,
+        quantifiedProducts: [item]
+      });
 
       // iterate thru cart, if item.seller not most recent,
       // make new array on fullOrderObject and set mostRecent to current
@@ -130,28 +116,15 @@ exports.checkout = async (req, res) => {
       // when object is fully built, iterate through, create one order per seller
       // MAKE SURE to calculate price (quantity * price)
     } else {
-      // item.seller is most recent seller
-      // push to current array
-      // and increase count
-      // console.log('Item is previous seller. item: ', item);
-      //
-      //
-      console.log('111: ', fullOrderObject[item.seller].products);
-      console.log('item.products: ', item.products);
-      // fullOrderObject[item.seller].products.push({
-      //   count: item.count,
-      //   products: item.products
-      // });
-      // fullOrderObject[item.seller].count =
-      //   fullOrderObject[item.seller].count + 1;
-      //
-      //
-      // fullOrderObject[item.seller] = {
-      //   ...item,
-      // // update this seller, with the key of the existing item array
-      // // put this item on that array
-      // };
-      // console.log('item is previous seller: ', item.seller);
+      const existingOrderInArrayForm = fullOrderObject.filter(
+        order => order.seller === item.seller
+      );
+      const existingOrder = existingOrderInArrayForm[0];
+
+      existingOrder.quantifiedProducts.push(item);
+      existingOrder.totalPrice =
+        existingOrder.totalPrice + item.price * item.quantity;
+      existingOrder.count = existingOrder.count + 1;
     }
   });
 
@@ -162,7 +135,19 @@ exports.checkout = async (req, res) => {
   console.log('############');
   console.log('############');
 
-  console.log('fullOrderObject: ', fullOrderObject);
+  // console.log('fullOrderObject: ', fullOrderObject);
+
+  async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
+  }
+
+  asyncForEach(fullOrderObject, async order => {
+    console.log('ORDER: ', order);
+  });
+
+  // console.log('PROCCESS: ', fullOrderObject);
 
   // console.log('fullOrderObject: ', fullOrderObject['1'].products);
   // const order = new Order(userId,seller,  );
@@ -212,6 +197,11 @@ const simpleModelOfSeparatedIntoOrders = {
   sellerId1: [{ product1: 1 }, { product2: 2 }],
   sellerId2: [{ product: 2 }, { product2: 2 }]
 };
+
+const arrayVersion = [
+  { sellerId1: 42, quantifiedProducts: [{ prop1: 1 }, { prop2: 2 }] },
+  { sellerId2: 40, quantifiedProducts: [{ prop1: 2 }, { prop2: 2 }] }
+];
 
 const currentObject = {
   sellerId1: { count: 1, products: [] }
