@@ -18,11 +18,11 @@ module.exports = class Order {
     return db.execute('SELECT * FROM orders');
   }
 
-  static FindBySeller(seller) {
+  static findBySeller(seller) {
     return db.execute('SELECT * FROM orders WHERE orders.seller = ?', [seller]);
   }
 
-  static FindByCustomer(customer) {
+  static findByCustomer(customer) {
     return db.execute('SELECT * FROM orders WHERE orders.cusomer = ?', [
       customer
     ]);
@@ -32,13 +32,3 @@ module.exports = class Order {
     return db.execute('SELECT * FROM orders WHERE orders.id = ?', [id]);
   }
 };
-
-// const orderObject = {
-//   customer: 3,
-//   seller: 1,
-//   price: 2292,
-//   products: [
-//     /*json array object here? */
-//   ],
-//   date: 109129287298
-// };

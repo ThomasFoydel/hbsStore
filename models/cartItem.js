@@ -33,4 +33,7 @@ module.exports = class CartItem {
       [userId, productId]
     );
   }
+  static clearCart(customer) {
+    return db.execute('DELETE FROM cartItems WHERE customer = ?', [customer]);
+  }
 };

@@ -27,7 +27,7 @@ current objectives:
 
 ### orders
 
-- fix totalprice calculation
+- calculate tax ?
 - send email to artist (nodemailer?)
 - send email to patron
 

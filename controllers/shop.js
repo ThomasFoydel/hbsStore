@@ -21,11 +21,7 @@ exports.getCart = async (req, res) => {
     });
   }
 
-  // cart is not empty. determine quantities:
-  // get quantity of each item from usercart
-
-  // let productsSoFar = [];
-  // let quantifiedCart = [];
+  // cart not empty
   const quantifiedCart = quantifyCart(userCart);
 
   res.render('shop/cart', {
@@ -91,12 +87,12 @@ exports.checkout = async (req, res) => {
   // sort cartitems by seller,
   let mostRecentSeller = '';
   let fullOrderArray = [];
-  let mostRecentOrder;
 
   const quantifiedCart = quantifyCart(userCart);
 
   quantifiedCart.forEach((item, i) => {
     if (item.seller !== mostRecentSeller) {
+      // new seller
       mostRecentSeller = item.seller;
 
       fullOrderArray.push({
@@ -106,18 +102,12 @@ exports.checkout = async (req, res) => {
         totalPrice: item.price * item.quantity,
         quantifiedProducts: [item]
       });
-
-      // iterate thru cart, if item.seller not most recent,
-      // make new array on fullOrderArray and set mostRecent to current
-
-      // when object is fully built, iterate through, create one order per seller
-      // MAKE SURE to calculate price (quantity * price)
     } else {
+      // new quantified product from same seller
       const existingOrderInArrayForm = fullOrderArray.filter(
         order => order.seller === item.seller
       );
       const existingOrder = existingOrderInArrayForm[0];
-
       existingOrder.quantifiedProducts.push(item);
       existingOrder.totalPrice =
         existingOrder.totalPrice + item.price * item.quantity;
@@ -132,9 +122,7 @@ exports.checkout = async (req, res) => {
   }
 
   asyncForEach(fullOrderArray, async orderObject => {
-    const { seller, totalPrice, quantifiedProducts, customer } = orderObject;
-
-    // const newOrder = new Order()
+    const { seller, totalPrice, quantifiedProducts } = orderObject;
 
     const newOrder = new Order(
       req.session.userId,
@@ -147,79 +135,11 @@ exports.checkout = async (req, res) => {
     console.log('new order: ', newOrder);
     newOrder
       .save()
-      .then(result => console.log('result: ', result))
+      .then(result => {
+        console.log('result: ', result);
+        CartItem.clearCart(userId);
+        res.redirect('/');
+      })
       .catch(err => console.log('err: ', err));
   });
-};
-
-// this.customer = c;
-// this.seller = s;
-// this.price = p1;
-// this.productid = p2;
-// this.date = d;
-// this.quantity = q;
-
-// this.customer = c;
-// this.seller = s;
-// this.price = pri;
-// this.product = pro;
-// this.date = d;
-
-const separateProductsWithQuantity = [
-  {
-    id: 42,
-    product: 8,
-    price: 89779079,
-    imageUrl:
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone11-red-select-2019?wid=940',
-    seller: 1,
-    quantity: 1
-  },
-  {
-    id: 43,
-    product: 7,
-    price: 10,
-    imageUrl:
-      'https://pics.me.me/im-boo-boo-the-fool-im-boo-boo-the-fucking-49773182.png',
-    seller: 1,
-    quantity: 3
-  }
-];
-
-const separateOrdersWithTotalPrice = [
-  {
-    seller: 1,
-    totalPrice: 34,
-    products: [{}, {}]
-  },
-  {
-    seller: 4,
-    totalPrice: 34,
-    products: [{}, {}]
-  }
-];
-
-const simpleModelOfSeparatedIntoOrders = {
-  sellerId1: [{ product1: 1 }, { product2: 2 }],
-  sellerId2: [{ product: 2 }, { product2: 2 }]
-};
-
-const arrayVersion = [
-  { sellerId1: 42, quantifiedProducts: [{ prop1: 1 }, { prop2: 2 }] },
-  { sellerId2: 40, quantifiedProducts: [{ prop1: 2 }, { prop2: 2 }] }
-];
-
-const currentObject = {
-  sellerId1: { count: 1, products: [] }
-};
-
-const orderObject = {
-  customer: 3,
-  seller: 1,
-  price: 2292,
-  seller: 4,
-  products: [
-    /*json array object here? */
-  ],
-  date: 109129287298
 };
