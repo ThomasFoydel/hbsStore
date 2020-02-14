@@ -121,25 +121,33 @@ exports.checkout = async (req, res) => {
     }
   }
 
-  asyncForEach(fullOrderArray, async orderObject => {
-    const { seller, totalPrice, quantifiedProducts } = orderObject;
+  const createOrdersInDataBasePromise = orderObject =>
+    new Promise((resolve, reject) => {
+      const { seller, totalPrice, quantifiedProducts } = orderObject;
 
-    const newOrder = new Order(
-      req.session.userId,
-      seller,
-      totalPrice,
-      JSON.stringify(quantifiedProducts),
-      'pending'
-    );
+      const newOrder = new Order(
+        req.session.userId,
+        seller,
+        totalPrice,
+        JSON.stringify(quantifiedProducts),
+        'pending'
+      );
 
-    console.log('new order: ', newOrder);
-    newOrder
-      .save()
-      .then(result => {
-        console.log('result: ', result);
-        CartItem.clearCart(userId);
-        res.redirect('/');
-      })
-      .catch(err => console.log('err: ', err));
-  });
+      newOrder
+        .save()
+        .then(result => {
+          return resolve(result);
+        })
+        .catch(err => console.log('err: ', err));
+    });
+
+  const start = async () => {
+    await asyncForEach(fullOrderArray, async orderObject => {
+      await createOrdersInDataBasePromise(orderObject);
+    });
+
+    CartItem.clearCart(userId);
+    res.redirect('/');
+  };
+  start();
 };
