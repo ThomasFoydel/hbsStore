@@ -11,9 +11,18 @@
 
 <body>
     <h2>admin products</h2>
+    {{#if hasProducts}}
+    {{#each products}}
+    <h2>{{title}}</h2>
+    <h2>{{price}}</h2>
+    <img src={{imageUrl}} />
+    <p>{{description}}</p>
+    {{/each}}
+    {{else}}
+    <h2>You haven't listed any products yet...</h2>
+    <a href="/admin/add-product">add a product</a>
+    {{/if}}
     <h2>admin products</h2>
-    <h2>admin products</h2>
-
 </body>
 
 </html>

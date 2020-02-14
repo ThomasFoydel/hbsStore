@@ -18,7 +18,7 @@ module.exports = class Product {
     return db.execute('SELECT * FROM products');
   }
 
-  static FindByAuthor() {
+  static findByAuthor(author) {
     return db.execute('SELECT * FROM products WHERE products.author = ?', [
       author
     ]);

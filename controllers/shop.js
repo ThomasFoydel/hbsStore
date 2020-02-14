@@ -1,5 +1,4 @@
 const db = require('../util/database');
-const Product = require('../models/product');
 const CartItem = require('../models/cartItem');
 const Order = require('../models/order');
 const { quantifyCart } = require('./util');
@@ -23,7 +22,6 @@ exports.getCart = async (req, res) => {
 
   // cart not empty
   const quantifiedCart = quantifyCart(userCart);
-
   res.render('shop/cart', {
     isLoggedIn: isLoggedIn,
     pageTitle: 'Cart',
@@ -80,7 +78,7 @@ exports.removeFromCart = (req, res) => {
 };
 
 exports.checkout = async (req, res) => {
-  const { isLoggedIn, userId } = req.session;
+  const { userId } = req.session;
   const response = await CartItem.findByUser(userId);
   const userCart = response[0];
 

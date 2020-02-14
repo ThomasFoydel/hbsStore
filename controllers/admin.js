@@ -117,15 +117,21 @@ exports.postLogout = (req, res) => {
   });
 };
 
-exports.getProducts = (req, res) => {
-  const isLoggedIn = req.session;
+exports.getProducts = async (req, res) => {
+  const { isLoggedIn, userId } = req.session;
   if (isLoggedIn) {
+    const responseFromDb = await Product.findByAuthor(userId);
+    const listOfCurrentUsersProducts = responseFromDb[0];
+    const thisUserHasProducts = listOfCurrentUsersProducts.length > 0;
+
     res.render('admin/products', {
       isLoggedIn: true,
       pageTitle: 'Products',
       path: '/admin/products',
       productCSS: true,
-      activeProductList: true
+      activeProductList: true,
+      hasProducts: thisUserHasProducts,
+      products: listOfCurrentUsersProducts
     });
   } else {
     res.redirect('/admin/login');
