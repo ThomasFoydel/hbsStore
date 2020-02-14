@@ -1,0 +1,28 @@
+.adminproducts-heading {
+}
+.adminproducts-product {
+  background: white;
+  text-align: center;
+  width: 15rem;
+  padding: 1.5rem;
+  height: 24rem;
+}
+
+.adminproducts-product-title {
+}
+
+.adminproducts-product-price {
+}
+
+.adminproducts-product-image {
+  max-width: 10rem;
+  max-height: 12rem;
+  /* margin-left: 50%;
+  transform: translateX(-50%); */
+}
+
+.adminproducts-product-description {
+}
+
+.adminproducts-noproducts {
+}

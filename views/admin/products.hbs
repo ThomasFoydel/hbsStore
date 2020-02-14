@@ -2,27 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{pageTitle}}</title>
     <link rel="stylesheet" href="/css/main.css">
-</head>
-
-<body>
-    <h2>admin products</h2>
+    <link rel="stylesheet" href="/css/adminproducts.css" </head> <body>
+    <h1 class="adminproducts-heading">My Products</h1>
     {{#if hasProducts}}
     {{#each products}}
-    <h2>{{title}}</h2>
-    <h2>{{price}}</h2>
-    <img src={{imageUrl}} />
-    <p>{{description}}</p>
+    <div class="adminproducts-product">
+        <a href="/shop/product/{{id}}">
+            <h2 class="adminproducts-product-title">{{title}}</h2>
+        </a>
+        <p class="adminproducts-product-price">{{price}}</p>
+        <img class="adminproducts-product-image" src={{imageUrl}} />
+        <p class="adminproducts-product-description">{{description}}</p>
+    </div>
     {{/each}}
     {{else}}
-    <h2>You haven't listed any products yet...</h2>
-    <a href="/admin/add-product">add a product</a>
+    <div class="adminproducts-noproducts">
+        <h2>You haven't listed any products yet...</h2>
+        <a href="/admin/add-product">add a product</a>
+    </div>
     {{/if}}
-    <h2>admin products</h2>
-</body>
+    </body>
 
 </html>

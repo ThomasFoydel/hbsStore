@@ -126,7 +126,7 @@ exports.getProducts = async (req, res) => {
 
     res.render('admin/products', {
       isLoggedIn: true,
-      pageTitle: 'Products',
+      pageTitle: 'My Products',
       path: '/admin/products',
       productCSS: true,
       activeProductList: true,
