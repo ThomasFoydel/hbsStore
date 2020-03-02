@@ -7,22 +7,10 @@
 
 <body>
     <main>
-        <article class="card product-item">
+        <article class="user">
             <header class="card__header">
                 <h1 class="product__title">{{user.name}}</h1>
             </header>
-            {{!-- <div class="card__image">
-                <img src={{user.imageUrl}} alt="A Book">
-            </div>
-            <div class="card__content">
-                <h2 class="product__price">${{product.price}}</h2>
-                <p class="product__description">{{product.description}}
-                </p>
-            </div>
-            <div class="card__actions">
-                <button class="btn">Add to Cart</button>
-            </div> --}}
-
             {{#if hasProducts }}
             <div class="grid">
                 {{#each products}}

@@ -71,19 +71,26 @@ app.use('/admin', adminRoutes);
 app.use('/shop', shopRoutes);
 app.use('/', (req, res) => {
   const { isLoggedIn } = req.session;
-  db.execute('SELECT * FROM products')
-    .then(result => {
-      res.render('shop/index', {
-        isLoggedIn: isLoggedIn,
-        pageTitle: 'home',
-        path: '/',
-        indexActive: true,
-        productCSS: true,
-        hasProducts: true,
-        products: result[0]
-      });
-    })
-    .catch(err => console.log(err));
+  res.render('shop/home', {
+    isLoggedIn: isLoggedIn,
+    pageTitle: 'home',
+    path: '/',
+    homeActive: true,
+    productCSS: true
+  });
+  // db.execute('SELECT * FROM products')
+  //   .then(result => {
+  //     res.render('shop/home', {
+  //       isLoggedIn: isLoggedIn,
+  //       pageTitle: 'home',
+  //       path: '/',
+  //       homeActive: true,
+  //       productCSS: true,
+  //       hasProducts: true,
+  //       products: result[0]
+  //     });
+  //   })
+  //   .catch(err => console.log(err));
 });
 
 app.use(errorController.getPageNotFound);

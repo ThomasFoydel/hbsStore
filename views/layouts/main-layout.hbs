@@ -27,23 +27,23 @@
                     </li>
                 </a>
                 </li>
-                <a class="{{#if indexActive }}active{{/if}}" href="/">
+                <a class="{{#if homeActive }}active{{/if}}" href="/">
                     <li class="main-header__item">
-                        Shop
+                        Home
                     </li>
                 </a>
-                <a class="{{#if activeProducts }}active{{/if}}" href="/shop/product-list">
+                <a class="{{#if activeProducts }}active{{/if}}" href="/shop/products">
                     <li class="main-header__item">
                         Products
                     </li>
                 </a>
+                {{#if isLoggedIn}}
                 <a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">
                     <li class="main-header__item">
                         Cart
                     </li>
                 </a>
 
-                {{#if isLoggedIn}}
                 <a class="{{#if activeAddProduct }}active{{/if}}" href="/admin/add-product">
                     <li class="main-header__item">
                         Add Product

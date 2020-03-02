@@ -59,55 +59,36 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = async (req, res) => {
   const { email, password } = req.body;
-  // const foundUser = await
   User.findByEmail(email).then(async response => {
     if (response[0][0]) {
       const user = response[0][0];
       const passwordsMatch = await bcrypt.compare(password, user.password);
       if (passwordsMatch) {
-        ////// SESSION METHOD /////
         req.session.isLoggedIn = true;
         req.session.userId = user.id;
         req.session.name = user.name;
         res.redirect('/');
-
-        // ///////
-        // // // // jwt method   // // // //
-        // const token = jwt.sign(
-        //   {
-        //     tokenUser: {
-        //       userId: user.id,
-        //       email: user.email
-        //     }
-        //   },
-        //   process.env.SECRET,
-        //   { expiresIn: '1000hr' }
-        // );
-        // const userInfo = {
-        //   name: user.name,
-        //   email: user.email,
-        //   id: user.id
-        // };
-        // console.log('userInfo: ', userInfo, token);
-        // res.status(200).send({
-        //   status: 'success',
-        //   message: 'Login successful',
-        //   data: {
-        //     user: userInfo,
-        //     token
-        //   },
-        //   headers: {
-        //     'x-auth-token': token
-        //   }
-        // });
       } else {
-        return res.json({ err: 'Incorrect password' });
+        return res.render('admin/login', {
+          isLoggedIn: false,
+          pageTitle: 'Login',
+          path: '/admin/login',
+          formCSS: true,
+          activeLogin: true,
+          errorMessage: 'Incorrect password'
+        });
       }
     } else {
-      return res.json({ err: 'Incorrect username' });
+      return res.render('admin/login', {
+        isLoggedIn: false,
+        pageTitle: 'Login',
+        path: '/admin/login',
+        formCSS: true,
+        activeLogin: true,
+        errorMessage: 'Incorrect username'
+      });
     }
   });
-  // console.log(foundUser[0]);
 };
 
 exports.postLogout = (req, res) => {

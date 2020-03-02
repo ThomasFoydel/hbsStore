@@ -92,6 +92,7 @@ a {
 }
 
 .card {
+  margin: 2rem;
   box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.151),
     -0.2rem -0.2rem 0.3rem rgba(255, 255, 255, 0.288);
 }

@@ -7,60 +7,68 @@ const { quantifyCart } = require('./util');
 
 exports.getCart = async (req, res) => {
   const { isLoggedIn, userId } = req.session;
-  const response = await CartItem.findByUser(userId);
-  const userCart = response[0];
+  if (isLoggedIn && userId) {
+    const response = await CartItem.findByUser(userId);
+    const userCart = response[0];
 
-  if (JSON.stringify(userCart) === JSON.stringify([])) {
-    // cart is empty
-    return res.render('shop/cart', {
+    if (JSON.stringify(userCart) === JSON.stringify([])) {
+      // cart is empty
+      return res.render('shop/cart', {
+        isLoggedIn: isLoggedIn,
+        pageTitle: 'Cart',
+        path: '/shop/cart',
+        activeCart: true,
+        hasItems: false,
+        cartItems: []
+      });
+    }
+
+    // cart not empty
+    const quantifiedCart = quantifyCart(userCart);
+    res.render('shop/cart', {
       isLoggedIn: isLoggedIn,
       pageTitle: 'Cart',
       path: '/shop/cart',
       activeCart: true,
-      hasItems: false,
-      cartItems: []
+      hasItems: true,
+      cartItems: quantifiedCart
     });
+  } else {
+    res.redirect('/admin/login');
   }
-
-  // cart not empty
-  const quantifiedCart = quantifyCart(userCart);
-  res.render('shop/cart', {
-    isLoggedIn: isLoggedIn,
-    pageTitle: 'Cart',
-    path: '/shop/cart',
-    activeCart: true,
-    hasItems: true,
-    cartItems: quantifiedCart
-  });
 };
 
 exports.addToCart = (req, res) => {
-  const newCartItem = new CartItem(
-    req.params.productid,
-    req.session.userId,
-    req.query.price,
-    req.query.imageUrl,
-    req.query.author
-  );
-  newCartItem
-    .save()
-    .then(result => {
-      res.redirect('/shop/cart');
-    })
-    .catch(error => console.log('new cart item err: ', error));
+  if (req.session.userId) {
+    const newCartItem = new CartItem(
+      req.params.productid,
+      req.session.userId,
+      req.query.price,
+      req.query.imageUrl,
+      req.query.author
+    );
+    newCartItem
+      .save()
+      .then(result => {
+        res.redirect('/shop/cart');
+      })
+      .catch(error => console.log('new cart item err: ', error));
+  } else {
+    res.redirect('/admin/login');
+  }
 };
 
-exports.getProducts = (req, res, next) => {
+exports.getProducts = (req, res) => {
   const { isLoggedIn } = req.session;
 
   db.execute('SELECT * FROM products').then(result => {
     let products = result[0];
     const hasProducts = products ? products.length > 0 : null;
-    res.render('shop/product-list', {
+    res.render('shop/products', {
       isLoggedIn: isLoggedIn,
       prods: products,
       pageTitle: 'Shop',
-      path: '/shop/product-list',
+      path: '/shop/products',
       hasProducts,
       activeProducts: true,
       productCSS: true
@@ -169,16 +177,17 @@ exports.getUser = async (req, res) => {
   const { isLoggedIn } = req.session;
   const userResponseFromDb = await User.findById(req.params.id);
   const foundUser = userResponseFromDb[0][0];
-  console.log('req. params.id : ', req.params.id);
   const productsResponseFromDb = await Product.findByAuthor(req.params.id);
-  const products = productsResponseFromDb[0][0];
+  const products = productsResponseFromDb[0];
   const hasProducts = products.length > 0;
+
   res.render('shop/user', {
     isLoggedIn,
     pageTitle: "User's Gallery",
     path: '/shop/user',
     user: foundUser,
     products,
-    hasProducts
+    hasProducts,
+    productCSS: true
   });
 };

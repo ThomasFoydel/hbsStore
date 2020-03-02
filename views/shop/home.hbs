@@ -10,9 +10,12 @@
 </head>
 
 <body>
-    <h1>INDEX</h1>
     <main>
-        {{#if hasProducts}}
+        <h2>{{pageTitle}}</h2>
+        <h2>{{pageTitle}}</h2>
+        <h2>{{pageTitle}}</h2>
+        <h2>{{pageTitle}}</h2>
+        {{!-- {{#if hasProducts}}
         <div class="grid">
 
             {{#each products}}
@@ -35,6 +38,7 @@
                 <div class="card__actions">
                     <form action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&author={{author}}"
                         method="POST">
+
                         <button class="btn" type="submit">Add to Cart</button>
                     </form>
                 </div>
@@ -44,7 +48,7 @@
         </div>
         {{else}}
         <h1>No Products Found!</h1>
-        {{/if}}
+        {{/if}} --}}
     </main>
 </body>
 
