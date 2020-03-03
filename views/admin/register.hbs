@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
-    {{!-- <link rel="stylesheet" href="/css/product.css"> --}}
 </head>
 
 <body>
@@ -18,19 +17,53 @@
             <h2>{{pageTitle}}</h2>
             <div class="form-control">
                 <label for="name">name</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" class="
+                    {{#if nameMissing}} register-input-error {{/if}}
+                    {{#if userNameAlreadyExists}} register-input-error {{/if}}
+                    {{#if nameWrongLength}} register-input-error {{/if}}
+                ">
+                <p class="register-errormessage">
+                    {{#if nameMissing}}name input required. {{/if}}
+                    {{#if userNameAlreadyExists}}name already taken. {{/if}}
+                    {{#if nameWrongLength}}name must be between 6 and 25 characters. {{/if}}
+                </p>
             </div>
             <div class="form-control">
                 <label for="title">email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" class="
+                    {{#if emailMissing}} register-input-error {{/if}}
+                    {{#if userEmailAlreadyExists}} register-input-error {{/if}}
+                ">
+                <p class="register-errormessage">
+                    {{#if emailMissing}}email input required. {{/if}}
+                    {{#if userEmailAlreadyExists}}account with this email already exists. {{/if}}
+                </p>
             </div>
             <div class="form-control">
                 <label for="password">password</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" class="
+                    {{#if passwordMissing}} register-input-error {{/if}}
+                    {{#if passwordsNotMatch}} register-input-error {{/if}}
+                    {{#if passwordWrongLength}} register-input-error {{/if}}
+                ">
+                <p class="register-errormessage">
+                    {{#if passwordMissing}}password input required {{/if}}
+                    {{#if passwordsNotMatch}}passwords do not match. {{/if}}
+                    {{#if passwordWrongLength}}password must be between 8 and 25 characters. {{/if}}
+                </p>
             </div>
             <div class="form-control">
                 <label for="password">confirm password</label>
-                <input type="password" name="confirmpassword" id="confirmpassword">
+                <input type="password" name="confirmpassword" id="confirmpassword" class="
+                    {{#if passwordMissing}} register-input-error {{/if}}
+                    {{#if passwordsNotMatch}} register-input-error {{/if}}
+                    {{#if passwordWrongLength}} register-input-error {{/if}}
+                ">
+                <p class="register-errormessage">
+                    {{#if confirmpasswordMissing}}confirm password input required {{/if}}
+                    {{#if passwordsNotMatch}}passwords do not match. {{/if}}
+                    {{#if passwordWrongLength}}password must be between 8 and 25 characters. {{/if}}
+                </p>
             </div>
             <button class="btn" type="submit">Register</button>
         </form>

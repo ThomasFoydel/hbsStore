@@ -3,6 +3,7 @@
   max-width: 45rem;
   margin-left: 50%;
   transform: translateX(-50%);
+  min-width: 30rem;
 }
 
 .register-form h2,
@@ -23,7 +24,7 @@
 }
 
 .login-errormessage,
-.register-input-error {
+.register-errormessage {
   color: rgb(189, 0, 117);
   position: absolute;
   right: 0;

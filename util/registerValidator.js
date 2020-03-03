@@ -26,7 +26,6 @@ module.exports = async ({ name, email, password, confirmpassword }) => {
   const foundEmail = await User.findByEmail(email);
 
   if (foundEmail[0].length !== 0) {
-    console.log('foundEmail: ', foundEmail[0]);
     errors.userEmailAlreadyExists = true;
   }
 
