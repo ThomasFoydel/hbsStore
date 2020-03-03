@@ -21,3 +21,16 @@
   margin-left: 50%;
   transform: translateX(-50%);
 }
+
+.login-errormessage,
+.register-input-error {
+  color: rgb(189, 0, 117);
+  position: absolute;
+  right: 0;
+  margin-top: -0.2rem;
+}
+
+.login-input-error,
+.register-input-error {
+  background: rgba(189, 0, 117, 0.3);
+}

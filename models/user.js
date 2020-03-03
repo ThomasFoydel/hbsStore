@@ -17,6 +17,10 @@ module.exports = class User {
     return db.execute('SELECT * FROM users');
   }
 
+  static findByName(name) {
+    return db.execute('SELECT * FROM users WHERE users.id = ?', [name]);
+  }
+
   static findById(id) {
     return db.execute('SELECT * FROM users WHERE users.id = ?', [id]);
   }

@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const Product = require('../models/product');
 const User = require('../models/user');
-// const jwt = require('jsonwebtoken');
+
+const registerValidator = require('../util/registerValidator');
 
 const path = require('path');
 require('dotenv').config({
@@ -24,22 +25,40 @@ exports.getRegister = (req, res) => {
 };
 
 exports.postRegister = async (req, res) => {
-  let errors = [];
+  // let errors = {};
   const { name, email, password, confirmpassword } = req.body;
-  if (password !== confirmpassword) {
-    let newError = 'passwords do not match';
-    errors.push(newError);
-  }
-  const hashedPw = await bcrypt.hash(password, 12);
-  if (errors.length > 0) {
-    res.send({ errorMessage: errors });
-  } else {
-    const user = new User(name, email, hashedPw);
-    user.save().then(result => {
-      console.log('result: ', result);
-      res.redirect('/');
+  let errors = await registerValidator({
+    name,
+    email,
+    password,
+    confirmpassword
+  });
+
+  if (errors.size(errors) > 0) {
+    return res.render('admin/register', {
+      isLoggedIn: false,
+      pageTitle: 'Register',
+      path: '/admin/register',
+      formCSS: true,
+      activeRegister: true,
+      nameMissing: errors.nameMissing,
+      emailMissing: errors.emailMissing,
+      passwordMissing: errors.passwordMissing,
+      confirmpasswordMissing: errors.confirmpasswordMissing,
+      userEmailAlreadyExists: errors.userEmailAlreadyExists,
+      userNameAlreadyExists: errors.userNameAlreadyExists,
+      passwordsNotMatch: errors.passwordsNotMatch,
+      nameWrongLength: errors.nameWrongLength,
+      passwordWrongLength: errors.passwordWrongLength
     });
   }
+
+  const hashedPw = await bcrypt.hash(password, 12);
+  const user = new User(name, email, hashedPw);
+  user.save().then(result => {
+    console.log('new user saved. result: ', result);
+    res.redirect('/admin/login');
+  });
 };
 
 exports.getLogin = (req, res) => {
@@ -75,7 +94,7 @@ exports.postLogin = async (req, res) => {
           path: '/admin/login',
           formCSS: true,
           activeLogin: true,
-          errorMessage: 'Incorrect password'
+          passwordError: true
         });
       }
     } else {
@@ -85,7 +104,7 @@ exports.postLogin = async (req, res) => {
         path: '/admin/login',
         formCSS: true,
         activeLogin: true,
-        errorMessage: 'Incorrect username'
+        emailError: true
       });
     }
   });

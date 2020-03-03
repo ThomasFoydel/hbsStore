@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/css/auth.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    {{!-- <link rel="stylesheet" href="/css/product.css"> --}}
 </head>
 
 <body>
@@ -20,14 +19,23 @@
             <h2>{{pageTitle}}</h2>
             <div class="form-control">
                 <label for="title">email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" {{#if emailError}} class="login-input-error" {{/if}}>
+                {{#if emailError}}
+                <p class="login-errormessage">no email associate with this account</p>
+                {{/if}}
             </div>
             <div class="form-control">
                 <label for="password">password</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" {{#if passwordError}} class="login-input-error"
+                    {{/if}}>
+                {{#if passwordError}}
+                <p class="login-errormessage">incorrect password</p>
+                {{/if}}
             </div>
             <button id="login-submitbutton" class="btn" type="submit">Login</button>
         </form>
+
+
     </main>
 
     {{!-- <script>
