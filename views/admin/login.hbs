@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -18,7 +16,7 @@
         <form class="login-form" id="login-form" action="/admin/login" method="POST">
             <h2>{{pageTitle}}</h2>
             <div class="form-control">
-                <label for="title">email</label>
+                <label for="email">email</label>
                 <input type="email" name="email" id="email" {{#if emailError}} class="login-input-error" {{/if}}>
                 {{#if emailError}}
                 <p class="login-errormessage">no email associate with this account</p>
@@ -35,33 +33,7 @@
             <button id="login-submitbutton" class="btn" type="submit">Login</button>
         </form>
 
-
     </main>
-
-    {{!-- <script>
-        $(document).ready(() => {
-            document.getElementById("login-form").addEventListener("submit", (e) => {
-                e.preventDefault();
-                const email = e.target.elements.email.value;
-                const password = e.target.elements.password.value
-                $.ajax({
-                    type: "POST",
-                    url: "/admin/login",
-                    data: { email, password }
-                })
-                    .done(response => {
-                        const { id, name, email } = response.data.user;
-                        const { token } = response.data;
-                        localStorage.setItem("hbs-userId", id);
-                        localStorage.setItem("hbs-name", name);
-                        localStorage.setItem("hbs-email", email);
-                        localStorage.setItem("hbs-token", token);
-                        localStorage.setItem("hbs-isLoggedIn", true)
-                    })
-                    .fail(failure => { console.log("login request failed. error: ", failure) });
-            })
-        })
-    </script> --}}
 </body>
 
 </html>

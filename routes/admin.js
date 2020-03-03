@@ -29,4 +29,13 @@ router.post('/add-product', adminController.postAddProduct);
 // /admin/products => GET
 router.get('/products', adminController.getProducts);
 
+// /admin/myshop => GET
+router.get('/myshop', adminController.getMyShop);
+
+// /admin/edit-shop => GET
+router.get('/edit-shop', adminController.getEditShop);
+
+// /admin/edit-shop => POST
+router.post('/edit-shop', adminController.postEditShop);
+
 module.exports = router;

@@ -129,7 +129,7 @@ exports.getProducts = async (req, res) => {
       pageTitle: 'My Products',
       path: '/admin/products',
       productCSS: true,
-      activeProductList: true,
+      activeMyProducts: true,
       hasProducts: thisUserHasProducts,
       products: listOfCurrentUsersProducts
     });
@@ -161,4 +161,109 @@ exports.postAddProduct = (req, res) => {
   product.save().then(result => {
     res.redirect('/');
   });
+};
+
+exports.getMyShop = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+
+  if (isLoggedIn) {
+    const dbProductsResponse = await Product.findByAuthor(userId);
+    const listOfCurrentUsersProducts = dbProductsResponse[0];
+    const thisUserHasProducts = listOfCurrentUsersProducts.length > 0;
+
+    const dbUserResponse = await User.findById(userId);
+    const foundUser = dbUserResponse[0][0];
+
+    res.render('admin/myshop', {
+      isLoggedIn: isLoggedIn,
+      pageTitle: 'My Shop',
+      path: '/admin/myshop',
+      activeMyShop: true,
+      productCSS: true,
+      name: foundUser.name,
+      email: foundUser.email,
+      shopTitle: foundUser.shopTitle,
+      coverPic: foundUser.coverPic,
+      profilePic: foundUser.profilePic,
+      bio: foundUser.bio,
+      hasProducts: thisUserHasProducts,
+      products: listOfCurrentUsersProducts
+    });
+  } else {
+    res.redirect('/admin/login');
+  }
+};
+
+exports.getEditShop = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+  // res.render('admin/editshop', {
+  //   isLoggedIn: isLoggedIn,
+  //   pageTitle: 'Edit Shop',
+  //   path: '/admin/myshop',
+  //   userId: userId
+  // });
+  User.findById(userId).then(response => {
+    const foundUser = response[0][0];
+    res.render('admin/editshop', {
+      isLoggedIn: isLoggedIn,
+      pageTitle: 'Edit Shop',
+      path: '/admin/myshop',
+      userId: userId,
+      name: foundUser.name,
+      email: foundUser.email,
+      shopTitle: foundUser.shopTitle,
+      coverPic: foundUser.coverPic,
+      profilePic: foundUser.profilePic,
+      bio: foundUser.bio
+    });
+  });
+};
+
+exports.postEditShop = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+  const { email, name, shopTitle, profilePic, coverPic, bio } = req.body;
+
+  const renderEditShop = () => {
+    User.findById(userId).then(response => {
+      const foundUser = response[0][0];
+      res.render('admin/editshop', {
+        isLoggedIn: isLoggedIn,
+        pageTitle: 'Edit Shop',
+        path: '/admin/myshop',
+        userId: userId,
+        name: foundUser.name,
+        email: foundUser.email,
+        shopTitle: foundUser.shopTitle,
+        coverPic: foundUser.coverPic,
+        profilePic: foundUser.profilePic,
+        bio: foundUser.bio
+      });
+    });
+  };
+
+  if (name) {
+    const updatedUser = await User.update('email', shoptitle, userId);
+    renderEditShop();
+  }
+  if (email) {
+    const updatedUser = await User.update('email', shoptitle, userId);
+    renderEditShop();
+  }
+  if (shopTitle) {
+    User.update('shopTitle', shoptitle, userId).then(res => {
+      renderEditShop();
+    });
+  }
+  if (profilePic) {
+    const updatedUser = await User.update('profilePic', profilePic, userId);
+    renderEditShop();
+  }
+  if (coverPic) {
+    const updatedUser = await User.update('coverPic', coverPic, userId);
+    renderEditShop();
+  }
+  if (bio) {
+    const updatedUser = await User.update('bio', bio, userId);
+    renderEditShop();
+  }
 };

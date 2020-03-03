@@ -44,14 +44,22 @@
                     </li>
                 </a>
 
-                <a class="{{#if activeAddProduct }}active{{/if}}" href="/admin/add-product">
+                <a class="{{#if activeMyProducts }}active{{/if}}" href="/admin/products">
+                    <li class="main-header__item">
+                        My Products
+                    </li>
+                </a>
+
+                {{!-- <a class="{{#if activeAddProduct }}active{{/if}}" href="/admin/add-product">
                     <li class="main-header__item">
                         Add Product
                     </li>
-                </a>
-                <a class="{{#if activeProductList }}active{{/if}}" href="/admin/products">
+                </a> --}}
+
+
+                <a class="{{#if activeMyShop }}active{{/if}}" href="/admin/myshop">
                     <li class="main-header__item">
-                        My Products
+                        My Shop
                     </li>
                 </a>
                 {{/if}}

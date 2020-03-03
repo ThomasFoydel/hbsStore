@@ -13,6 +13,13 @@ module.exports = class User {
       [this.name, this.email, this.password]
     );
   }
+  static update(property, value, userId) {
+    return db.execute(
+      'UPDATE users SET ' + property + ' = ? WHERE users.id = ?',
+      [value, userId]
+    );
+  }
+
   static fetchAll() {
     return db.execute('SELECT * FROM users');
   }
