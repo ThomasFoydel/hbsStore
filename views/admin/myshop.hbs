@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="/css/main.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/myshop.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    {{!-- {{#if shopTitle}} --}}
-    {{!-- <title>{{shopTitle}}</title> --}}
-    {{!-- {{else}}
-    <title>{{pageTitle}}</title>
-    {{/if}} --}}
 </head>
 
 <body>
@@ -30,11 +26,11 @@
                                 {{#each products}}
                                 <div class="myshop-product">
                                     <a href="/shop/product/{{id}}">
-                                        <h2 class="myshop-product-title">{{title}}</h2>
+                                        <h2 class="myshop-product-title text-center">{{title}}</h2>
+                                        <p class="myshop-product-price text-center">{{price}}</p>
+                                        <img class="myshop-product-image text-center" src={{imageUrl}} />
+                                        <p class="myshop-product-description text-center">{{description}}</p>
                                     </a>
-                                    <p class="myshop-product-price">{{price}}</p>
-                                    <img class="myshop-product-image" src={{imageUrl}} />
-                                    <p class="myshop-product-description">{{description}}</p>
                                 </div>
                                 {{/each}}
 

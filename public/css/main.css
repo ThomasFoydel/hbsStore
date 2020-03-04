@@ -16,8 +16,9 @@ main {
   margin: auto;
 }
 
-a {
-  text-decoration: none;
+a,
+a:hover {
+  text-decoration: none !important;
 }
 
 .main-header {

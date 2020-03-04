@@ -178,7 +178,7 @@ exports.getMyShop = async (req, res) => {
       isLoggedIn: isLoggedIn,
       path: '/admin/myshop',
       activeMyShop: true,
-      productCSS: true,
+      // productCSS: true,
       pageTitle: shopTitle ? shopTitle : 'my shop',
       name: name,
       email: email,
