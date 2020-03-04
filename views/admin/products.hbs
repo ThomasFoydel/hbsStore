@@ -3,9 +3,12 @@
 
 <head>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/adminproducts.css" </head> <body>
+    <link rel="stylesheet" href="/css/adminproducts.css" </head>
+
+<body>
     <h1 class="adminproducts-heading">My Products</h1>
     {{#if hasProducts}}
+    <a href="/admin/add-product">add another product</a>
     {{#each products}}
     <div class="adminproducts-product">
         <a href="/shop/product/{{id}}">
@@ -22,6 +25,6 @@
         <a href="/admin/add-product">add a product</a>
     </div>
     {{/if}}
-    </body>
+</body>
 
 </html>

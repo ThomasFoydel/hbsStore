@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
+    <script src="https://kit.fontawesome.com/fe6ab65c8b.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -37,6 +40,7 @@
                         Products
                     </li>
                 </a>
+
                 {{#if isLoggedIn}}
                 <a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">
                     <li class="main-header__item">
@@ -49,13 +53,6 @@
                         My Products
                     </li>
                 </a>
-
-                {{!-- <a class="{{#if activeAddProduct }}active{{/if}}" href="/admin/add-product">
-                    <li class="main-header__item">
-                        Add Product
-                    </li>
-                </a> --}}
-
 
                 <a class="{{#if activeMyShop }}active{{/if}}" href="/admin/myshop">
                     <li class="main-header__item">
@@ -87,22 +84,106 @@
                     </li>
                 </a>
                 {{/if}}
-
             </ul>
         </nav>
 
     </header>
-    {{{ body }}}
-    {{!-- <script>
-        const loggedInEl = document.querySelector(".loggedin");
-        const isLoggedIn = localStorage.getItem("hbs-isLoggedIn");
-        loggedInEl.innerHTML = isLoggedIn ? "yep u r logged in" : "oh no ur not!";
+    {{! -- 
+    ========================   SMALL HEADER   =======================
+    --}}
+    <header class="main-header-small">
+        <div class="main-header__item-list">
 
-        const logoutButton = document.querySelector("#logout");
-        logoutButton.addEventListener("click", function () {
-            localStorage.removeItem("hbs-isLoggedIn");
+            <a href="/">
+                <li class="main-header__item">
+                    <img class="logo" src="/img/logo.svg">
+                </li>
+            </a>
+
+            {{!-- <a href="/"> --}}
+            <li class="main-header__item main-header-menuopen">
+                <i class="fas fa-bars"></i>
+            </li>
+            {{!-- </a> --}}
+        </div>
+
+        <div class="main-header-small-collapse">
+
+            <a class="{{#if homeActive }}active{{/if}}" href="/">
+                <li class="main-header__item">
+                    Home
+                </li>
+            </a>
+            <a class="{{#if activeProducts }}active{{/if}}" href="/shop/products">
+                <li class="main-header__item">
+                    Products
+                </li>
+            </a>
+
+            {{#if isLoggedIn}}
+            <a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">
+                <li class="main-header__item">
+                    Cart
+                </li>
+            </a>
+
+            <a class="{{#if activeMyProducts }}active{{/if}}" href="/admin/products">
+                <li class="main-header__item">
+                    My Products
+                </li>
+            </a>
+
+            <a class="{{#if activeMyShop }}active{{/if}}" href="/admin/myshop">
+                <li class="main-header__item">
+                    My Shop
+                </li>
+            </a>
+            {{/if}}
+            </ul>
+
+            {{#if isLoggedIn}}
+            <form action="/admin/logout" method="post">
+                <button class="logout-button text-center" type="submit">
+                    <li class="main-header__item">
+                        Logout
+                    </li>
+                </button>
+            </form>
+            {{else}}
+
+            <ul class="main-header__item-list">
+                <a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">
+                    <li class="main-header__item">
+                        Login
+                    </li>
+                </a>
+                <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
+                    <li class="main-header__item">
+                        Register
+                    </li>
+                </a>
+                {{/if}}
+
+
+        </div>
+
+    </header>
+
+    {{{ body }}}
+    <script>
+        const collapseMenu = document.querySelector(".main-header-small-collapse");
+        collapseMenu.style.opacity = "0";
+        const menuOpenButton = document.querySelector(".main-header-menuopen");
+        menuOpenButton.addEventListener("click", () => {
+            if (collapseMenu.style.opacity === "0") {
+                collapseMenu.style.marginLeft = "0%";
+                collapseMenu.style.opacity = "100";
+            } else {
+                collapseMenu.style.marginLeft = "-100%";
+                collapseMenu.style.opacity = "0";
+            }
         })
-    </script> --}}
+    </script>
 </body>
 
 </html>
