@@ -1,8 +1,156 @@
+.myshop-main {
+  /* min-width: 1000px; */
+}
+
+.myshop-container {
+  min-width: 1000px;
+}
+
 .myshop-coverpic {
   width: 100vw;
   height: 100vh;
+  overflow-y: scroll;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+.myshop-profilepicture {
+  border-radius: 10000%;
+  width: 15rem;
+  height: 15rem;
+  border: 7px solid #ddd;
+  z-index: 2;
+  margin-top: 5rem;
+}
+
+@media (max-width: 900px) {
+  .myshop-profilepicture {
+    width: 11rem;
+    height: 11rem;
+    margin-top: 8.6rem;
+  }
+}
+
+.myshop-name,
+.myshop-email,
+.myshop-shoptitle,
+.myshop-editlink {
+  color: #eee;
+}
+
+.myshop-shoptitle {
+  font-size: 7rem;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  width: 100%;
+  background: rgba(18, 18, 18, 0.146) !important;
+}
+
+@media (max-width: 900px) {
+  .myshop-shoptitle {
+    text-align: center;
+    top: 0rem;
+    font-size: 3.8rem;
+    min-width: 100vw;
+  }
+}
+
+.myshop-sidebar {
+  right: 0;
+  position: fixed !important;
+}
+
+@media (max-width: 900px) {
+  .myshop-sidebar {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.myshop-infobox {
+  background: rgba(0, 0, 0, 0.166);
+  padding: 2rem;
+  margin-top: -1rem;
+}
+
+@media (max-width: 900px) {
+  .myshop-infobox {
+    display: none;
+  }
+}
+
+.myshop-smallinfoboxfooter {
+  background: rgba(0, 0, 0, 0.166);
+  /* padding: 2rem;
+    margin-top: -1rem; */
+  position: fixed;
+  bottom: 0;
+  display: none;
+  z-index: 999;
+  height: 5rem;
+  width: 100vw;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 900px) {
+  .myshop-smallinfoboxfooter {
+    display: inherit;
+  }
+  .myshop-smallinfoboxfooter span a {
+    display: inline;
+  }
+}
+
+.myshop-product {
+  background: rgba(255, 255, 255, 0.379);
+  width: 13rem;
+}
+
+.myshop-product img {
+  width: 100px;
+  transform: translateX(-50%);
+  margin-left: 50%;
+}
+
+/* .myshop-products-section {
+  margin-top: 18rem;
+  display: flex;
+  overflow: scroll;
+  height: 35%;
+} */
+
+@media (min-width: 500px) {
+  .myshop-products-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 700px) {
+  .myshop-products-section {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .myshop-products-section {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .myshop-products-section {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.myshop-products-section {
+  display: grid;
+  grid-gap: 1rem;
+  justify-items: center;
+  margin-top: 20rem;
+  overflow: scroll;
+  height: 250px;
+  width: 100vw;
 }

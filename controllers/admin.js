@@ -173,19 +173,19 @@ exports.getMyShop = async (req, res) => {
 
     const dbUserResponse = await User.findById(userId);
     const foundUser = dbUserResponse[0][0];
-
+    const { name, email, shopTitle, coverPic, profilePic, bio } = foundUser;
     res.render('admin/myshop', {
       isLoggedIn: isLoggedIn,
-      pageTitle: 'My Shop',
       path: '/admin/myshop',
       activeMyShop: true,
       productCSS: true,
-      name: foundUser.name,
-      email: foundUser.email,
-      shopTitle: foundUser.shopTitle,
-      coverPic: foundUser.coverPic,
-      profilePic: foundUser.profilePic,
-      bio: foundUser.bio,
+      pageTitle: shopTitle ? shopTitle : 'my shop',
+      name: name,
+      email: email,
+      shopTitle: shopTitle,
+      coverPic: coverPic,
+      profilePic: profilePic,
+      bio: bio,
       hasProducts: thisUserHasProducts,
       products: listOfCurrentUsersProducts
     });
@@ -196,25 +196,20 @@ exports.getMyShop = async (req, res) => {
 
 exports.getEditShop = async (req, res) => {
   const { userId, isLoggedIn } = req.session;
-  // res.render('admin/editshop', {
-  //   isLoggedIn: isLoggedIn,
-  //   pageTitle: 'Edit Shop',
-  //   path: '/admin/myshop',
-  //   userId: userId
-  // });
   User.findById(userId).then(response => {
     const foundUser = response[0][0];
+    const { name, email, shopTitle, coverPic, profilePic, bio } = foundUser;
     res.render('admin/editshop', {
       isLoggedIn: isLoggedIn,
       pageTitle: 'Edit Shop',
-      path: '/admin/myshop',
+      path: '/admin/editshop',
       userId: userId,
-      name: foundUser.name,
-      email: foundUser.email,
-      shopTitle: foundUser.shopTitle,
-      coverPic: foundUser.coverPic,
-      profilePic: foundUser.profilePic,
-      bio: foundUser.bio
+      name: name,
+      email: email,
+      shopTitle: shopTitle,
+      coverPic: coverPic,
+      profilePic: profilePic,
+      bio: bio
     });
   });
 };
@@ -226,17 +221,18 @@ exports.postEditShop = async (req, res) => {
   const renderEditShop = () => {
     User.findById(userId).then(response => {
       const foundUser = response[0][0];
+      const { name, email, shopTitle, coverPic, profilePic, bio } = foundUser;
       res.render('admin/editshop', {
         isLoggedIn: isLoggedIn,
         pageTitle: 'Edit Shop',
-        path: '/admin/myshop',
+        path: '/admin/editshop',
         userId: userId,
-        name: foundUser.name,
-        email: foundUser.email,
-        shopTitle: foundUser.shopTitle,
-        coverPic: foundUser.coverPic,
-        profilePic: foundUser.profilePic,
-        bio: foundUser.bio
+        name: name,
+        email: email,
+        shopTitle: shopTitle,
+        coverPic: coverPic,
+        profilePic: profilePic,
+        bio: bio
       });
     });
   };

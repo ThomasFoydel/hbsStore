@@ -7,61 +7,97 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/myshop.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    {{!-- {{#if shopTitle}} --}}
+    {{!-- <title>{{shopTitle}}</title> --}}
+    {{!-- {{else}}
     <title>{{pageTitle}}</title>
-
+    {{/if}} --}}
 </head>
 
 <body>
-    <main>
-        <div class="myshop-coverpic" url="{{coverPic}}"></div>
-        <div class="container">
-            <div class="row">
+    <main class="myshop-main">
+        <div class="myshop-coverpic" url="{{coverPic}}">
+            <div class="container myshop-container">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <h1 class="myshop-shoptitle jumbotron">{{shopTitle}}</h1>
+                        </div>
+                        <div class="row">
+
+                            <div class="myshop-products-section">
+                                {{#if hasProducts}}
+                                {{#each products}}
+                                <div class="myshop-product">
+                                    <a href="/shop/product/{{id}}">
+                                        <h2 class="myshop-product-title">{{title}}</h2>
+                                    </a>
+                                    <p class="myshop-product-price">{{price}}</p>
+                                    <img class="myshop-product-image" src={{imageUrl}} />
+                                    <p class="myshop-product-description">{{description}}</p>
+                                </div>
+                                {{/each}}
+
+                                {{else}}
+                                <div class="myshop-noproducts">
+                                    <h2>You haven't listed any products yet...</h2>
+                                    <a href="/admin/add-product">add a product</a>
+                                </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 myshop-sidebar">
+                        <div class="row justify-content-center">
+                            <img class="myshop-profilepicture"
+                                src="{{#if profilePic}}{{profilePic}}{{else}}https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80{{/if}}">
+
+                            <div class="myshop-infobox">
+
+                                <h1 class="myshop-name text-center">{{name}}</h1>
+
+                                <h6 class="myshop-email text-center">{{email}} </h6>
+
+                                <div class="row justify-content-center">
+                                    <a class="myshop-editlink" href="/admin/edit-shop">edit my shop</a>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
-                <h2>{{shopTitle}}</h2>
-                <a href="/admin/edit-shop">edit my shop</a>
-                <h2>{{name}}</h2>
-                <h2>{{email}} </h2>
 
 
-                <h1 class="myshop-heading">{{shopName}}</h1>
-                <img class="myshop-profilepicture"
-                    src="{{#if profilePic}}{{profilePic}}{{else}}https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80{{/if}}">
-                <h1 class="myshop-heading">{{shopName}}</h1>
-                {{#if hasProducts}}
-                {{#each products}}
-                <div class="adminproducts-product">
-                    <a href="/shop/product/{{id}}">
-                        <h2 class="adminproducts-product-title">{{title}}</h2>
-                    </a>
-                    <p class="adminproducts-product-price">{{price}}</p>
-                    <img class="adminproducts-product-image" src={{imageUrl}} />
-                    <p class="adminproducts-product-description">{{description}}</p>
+                    </div>
                 </div>
-                {{/each}}
-                {{else}}
-                <div class="adminproducts-noproducts">
-                    <h2>You haven't listed any products yet...</h2>
-                    <a href="/admin/add-product">add a product</a>
-                </div>
-                {{/if}}
 
-                <h2>MY SHOP </h2>
+
             </div>
+    </main>
+    <div class="myshop-smallinfoboxfooter">
+        <div class="text-center">
+            <span class="myshop-name text-center">{{name}}</span> /
+            <span class="myshop-email text-center">{{email}} </span>
         </div>
 
-    </main>
+
+        <a class="myshop-editlink" href="/admin/edit-shop">
+            <span class="row justify-content-center">
+                edit my shop
+            </span>
+        </a>
+
+    </div>
     <script>
         const coverPicElement = document.querySelector(".myshop-coverpic");
         const coverPicUrl = coverPicElement.getAttribute("url");
         if (coverPicUrl) {
-            coverPicElement.style.background = `lightblue url("${coverPicUrl}") no-repeat fixed center`;
+            coverPicElement.style.background = `linear-gradient(180deg,rgba(0, 0, 0, 0.521) 0%,rgba(0, 0, 0, 0.5) 100%), url("${coverPicUrl}") no-repeat fixed center`;
         } else {
-            coverPicElement.style.background = "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80";
+            coverPicElement.style.background = `linear-gradient(180deg, rgba(0, 0, 0, 0.521) 0%, rgba(0, 0, 0, 0.5) 100%), https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80`;
         }
-        console.log("coverPicDivValue2: ", coverPicUrl);
     </script>
 </body>
 
