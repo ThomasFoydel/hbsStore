@@ -21,6 +21,10 @@ a:hover {
   text-decoration: none !important;
 }
 
+button:focus {
+  outline: 0;
+}
+
 .main-header {
   width: 100%;
   height: 3.8rem;
@@ -54,12 +58,12 @@ a:hover {
 }
 
 .main-header-small-collapse {
-  /* display: none; */
-  height: 500px;
+  height: 432px;
   background: #bd0074;
   margin-left: -100%;
   max-width: 100vw;
   transition: all 0.4s ease;
+  opacity: 0;
 }
 
 @media (max-width: 1000px) {
@@ -95,7 +99,18 @@ a:hover {
   list-style: none;
 }
 
-.main-header__item:hover {
+.main-header-small-item {
+  padding: 0 1.3rem;
+  padding-top: 0.8rem;
+  color: #eee;
+  list-style: none;
+  display: block;
+  height: 4.5rem;
+  font-size: 1.9rem;
+}
+
+.main-header__item:hover,
+.main-header-small-item:hover {
   background: rgba(0, 0, 0, 0.055);
 }
 
@@ -110,8 +125,11 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
   border: none;
-  padding-top: 0.1rem;
+  padding: 0;
   font-size: 1rem;
+}
+.logout-button-small {
+  font-size: 1.9rem;
 }
 
 .main-header__item:hover,
@@ -187,4 +205,17 @@ a:hover {
   margin-left: -0.5rem;
   padding: 0rem;
   transition: all 0.7s ease;
+}
+
+.main-header-small-logo {
+  height: 1.8rem;
+  width: 4rem;
+}
+
+.main-header-menuopen {
+  position: absolute;
+  right: 0;
+  color: black;
+  cursor: pointer;
+  padding-top: 1rem;
 }

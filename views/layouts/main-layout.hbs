@@ -95,14 +95,14 @@
         <div class="main-header__item-list">
 
             <a href="/">
-                <li class="main-header__item">
-                    <img class="logo" src="/img/logo.svg">
+                <li class="main-header-small-item">
+                    <img class="logo main-header-small-logo" src="/img/logo.svg">
                 </li>
             </a>
 
             {{!-- <a href="/"> --}}
-            <li class="main-header__item main-header-menuopen">
-                <i class="fas fa-bars"></i>
+            <li class="main-header-small-item main-header-menuopen">
+                <i class="fas fa-xl fa-bars"></i>
             </li>
             {{!-- </a> --}}
         </div>
@@ -110,31 +110,31 @@
         <div class="main-header-small-collapse">
 
             <a class="{{#if homeActive }}active{{/if}}" href="/">
-                <li class="main-header__item">
+                <li class="main-header-small-item">
                     Home
                 </li>
             </a>
             <a class="{{#if activeProducts }}active{{/if}}" href="/shop/products">
-                <li class="main-header__item">
+                <li class="main-header-small-item">
                     Products
                 </li>
             </a>
 
             {{#if isLoggedIn}}
             <a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">
-                <li class="main-header__item">
+                <li class="main-header-small-item">
                     Cart
                 </li>
             </a>
 
             <a class="{{#if activeMyProducts }}active{{/if}}" href="/admin/products">
-                <li class="main-header__item">
+                <li class="main-header-small-item">
                     My Products
                 </li>
             </a>
 
             <a class="{{#if activeMyShop }}active{{/if}}" href="/admin/myshop">
-                <li class="main-header__item">
+                <li class="main-header-small-item">
                     My Shop
                 </li>
             </a>
@@ -143,33 +143,33 @@
 
             {{#if isLoggedIn}}
             <form action="/admin/logout" method="post">
-                <button class="logout-button text-center" type="submit">
-                    <li class="main-header__item">
+                <li class="main-header-small-item">
+                    <button class="logout-button logout-button-small" type="submit">
                         Logout
-                    </li>
-                </button>
+                    </button>
+                </li>
             </form>
             {{else}}
 
-            <ul class="main-header__item-list">
-                <a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">
-                    <li class="main-header__item">
-                        Login
-                    </li>
-                </a>
-                <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
-                    <li class="main-header__item">
-                        Register
-                    </li>
-                </a>
-                {{/if}}
+            <a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">
+                <li class="main-header-small-item">
+                    Login
+                </li>
+            </a>
 
+            <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
+                <li class="main-header-small-item">
+                    Register
+                </li>
+            </a>
+
+            {{/if}}
 
         </div>
-
     </header>
 
     {{{ body }}}
+
     <script>
         const collapseMenu = document.querySelector(".main-header-small-collapse");
         collapseMenu.style.opacity = "0";
