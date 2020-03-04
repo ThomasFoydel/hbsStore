@@ -238,15 +238,15 @@ exports.postEditShop = async (req, res) => {
   };
 
   if (name) {
-    const updatedUser = await User.update('email', shoptitle, userId);
+    const updatedUser = await User.update('email', name, userId);
     renderEditShop();
   }
   if (email) {
-    const updatedUser = await User.update('email', shoptitle, userId);
+    const updatedUser = await User.update('email', email, userId);
     renderEditShop();
   }
   if (shopTitle) {
-    User.update('shopTitle', shoptitle, userId).then(res => {
+    User.update('shopTitle', shopTitle, userId).then(res => {
       renderEditShop();
     });
   }
