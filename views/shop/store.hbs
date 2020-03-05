@@ -3,9 +3,90 @@
 
 <head>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/myshop.css">
+    <title>{{shopTitle}}</title>
 </head>
 
 <body>
+    <main class="myshop-main">
+        <div class="myshop-coverpic" url="{{coverPic}}">
+            <div class="container myshop-container">
+                <div class="row myshop-mainrow">
+                    <div class="col-8">
+                        <div class="row">
+                            <h1 class="myshop-shoptitle jumbotron">{{shopTitle}}</h1>
+                        </div>
+                        <div class="row">
+
+                            <div class="myshop-products-section">
+                                {{#if hasProducts}}
+                                {{#each products}}
+                                <div class="myshop-product">
+                                    <a href="/shop/product/{{id}}">
+                                        <h2 class="myshop-product-title text-center">{{title}}</h2>
+                                        <p class="myshop-product-price text-center">{{price}}</p>
+                                        <img class="myshop-product-image text-center" src={{imageUrl}} />
+                                        <p class="myshop-product-description text-center">{{description}}</p>
+                                    </a>
+                                </div>
+                                {{/each}}
+
+                                {{else}}
+                                <div class="myshop-noproducts">
+                                    <h2>You haven't listed any products yet...</h2>
+                                    <a href="/admin/add-product">add a product</a>
+                                </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 myshop-sidebar">
+                        <div class="row justify-content-center">
+                            <img class="myshop-profilepicture"
+                                src="{{#if profilePic}}{{profilePic}}{{else}}https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80{{/if}}">
+
+                            <div class="myshop-infobox">
+
+                                <h1 class="myshop-name text-center">{{name}}</h1>
+
+                                <h6 class="myshop-email text-center">{{email}} </h6>
+
+                                {{!-- <div class="row justify-content-center">
+                                    <a class="myshop-editlink" href="/admin/edit-shop">edit my shop</a>
+                                </div> --}}
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+    </main>
+    <div class="myshop-smallinfoboxfooter">
+        <div class="text-center">
+            <span class="myshop-name text-center">{{name}} /</span>
+            <span class="myshop-email text-center">{{email}} </span>
+        </div>
+
+    </div>
+    <script>
+        const coverPicElement = document.querySelector(".myshop-coverpic");
+        const coverPicUrl = coverPicElement.getAttribute("url");
+        if (coverPicUrl) {
+            coverPicElement.style.background = `linear-gradient(180deg,rgba(0, 0, 0, 0.521) 0%,rgba(0, 0, 0, 0.5) 100%), url("${coverPicUrl}") no-repeat fixed center`;
+        } else {
+            coverPicElement.style.background = `linear-gradient(180deg, rgba(0, 0, 0, 0.521) 0%, rgba(0, 0, 0, 0.5) 100%), https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80`;
+        }
+    </script>
+</body>
+{{!-- <body>
     <main>
         <article class="user">
             <header class="card__header">
@@ -37,6 +118,6 @@
             {{/if}}
         </article>
     </main>
-</body>
+</body> --}}
 
 </html>

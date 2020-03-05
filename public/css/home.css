@@ -1,0 +1,36 @@
+.home-background {
+  background: radial-gradient(rgba(0, 0, 0, 0.512) 50%, rgba(0, 0, 0, 0.2) 100%),
+    url('https://images.pexels.com/photos/2795605/pexels-photo-2795605.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background-size: cover;
+}
+
+.home-textbox {
+  background: rgba(0, 0, 0, 0.336);
+  backdrop-filter: blur(6px);
+  box-shadow: 2rem 2rem 5rem rgba(0, 0, 0, 0.2),
+    -2rem -2rem 5rem rgba(255, 255, 255, 0.2);
+  color: white;
+  height: 300px;
+  width: 65%;
+  margin-left: 50%;
+  margin-top: 19rem;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 3rem 1.8rem;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.home-textbox-logo {
+  height: 4rem;
+  width: 8rem;
+  filter: invert(1);
+}

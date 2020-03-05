@@ -182,9 +182,8 @@ exports.getProduct = async (req, res) => {
   const { isLoggedIn } = req.session;
   const responseFromDb = await Product.findById(req.params.id);
   const product = responseFromDb[0][0];
-  console.log('userResponseFromDb: ', product);
   const userResponseFromDb = await User.findById(product.author);
-  const foundUser = userResponseFromDb[0];
+  const foundUser = userResponseFromDb[0][0];
 
   res.render('shop/product', {
     isLoggedIn: isLoggedIn,
@@ -203,7 +202,7 @@ exports.getStore = async (req, res) => {
   const productsResponseFromDb = await Product.findByAuthor(req.params.id);
   const products = productsResponseFromDb[0];
   const hasProducts = products.length > 0;
-
+  const { shopTitle, coverPic, profilePic, name, email, bio } = foundUser;
   res.render('shop/store', {
     isLoggedIn,
     pageTitle: "User's Gallery",
@@ -211,6 +210,12 @@ exports.getStore = async (req, res) => {
     user: foundUser,
     products,
     hasProducts,
-    productCSS: true
+    productCSS: true,
+    shopTitle,
+    coverPic,
+    profilePic,
+    name,
+    email,
+    bio
   });
 };
