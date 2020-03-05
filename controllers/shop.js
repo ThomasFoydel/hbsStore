@@ -39,6 +39,7 @@ exports.getCart = async (req, res) => {
 };
 
 exports.addToCart = (req, res) => {
+  console.log('ADDDDD');
   if (req.session.userId) {
     const newCartItem = new CartItem(
       req.params.productid,
@@ -58,20 +59,37 @@ exports.addToCart = (req, res) => {
   }
 };
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
 exports.getProducts = (req, res) => {
   const { isLoggedIn } = req.session;
 
   db.execute('SELECT * FROM products').then(result => {
     let products = result[0];
     const hasProducts = products ? products.length > 0 : null;
-    res.render('shop/products', {
-      isLoggedIn: isLoggedIn,
-      prods: products,
-      pageTitle: 'Shop',
-      path: '/shop/products',
-      hasProducts,
-      activeProducts: true,
-      productCSS: true
+
+    const asyncNameFetch = async () => {
+      await asyncForEach(products, async product => {
+        const userDbResponse = await User.findById(product.author);
+        product.seller = userDbResponse[0][0].name;
+      });
+      return products;
+    };
+
+    asyncNameFetch().then(prods => {
+      res.render('shop/products', {
+        isLoggedIn: isLoggedIn,
+        prods: prods,
+        pageTitle: 'Shop',
+        path: '/shop/products',
+        hasProducts,
+        activeProducts: true,
+        productCSS: true
+      });
     });
   });
 };
@@ -164,16 +182,21 @@ exports.getProduct = async (req, res) => {
   const { isLoggedIn } = req.session;
   const responseFromDb = await Product.findById(req.params.id);
   const product = responseFromDb[0][0];
+  console.log('userResponseFromDb: ', product);
+  const userResponseFromDb = await User.findById(product.author);
+  const foundUser = userResponseFromDb[0];
+
   res.render('shop/product', {
     isLoggedIn: isLoggedIn,
     pageTitle: 'Shop',
     path: '/shop/product',
     product,
-    productCSS: true
+    productCSS: true,
+    authorName: foundUser.name
   });
 };
 
-exports.getUser = async (req, res) => {
+exports.getStore = async (req, res) => {
   const { isLoggedIn } = req.session;
   const userResponseFromDb = await User.findById(req.params.id);
   const foundUser = userResponseFromDb[0][0];
@@ -181,10 +204,10 @@ exports.getUser = async (req, res) => {
   const products = productsResponseFromDb[0];
   const hasProducts = products.length > 0;
 
-  res.render('shop/user', {
+  res.render('shop/store', {
     isLoggedIn,
     pageTitle: "User's Gallery",
-    path: '/shop/user',
+    path: '/shop/store',
     user: foundUser,
     products,
     hasProducts,

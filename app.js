@@ -75,22 +75,8 @@ app.use('/', (req, res) => {
     isLoggedIn: isLoggedIn,
     pageTitle: 'home',
     path: '/',
-    homeActive: true,
-    productCSS: true
+    homeActive: true
   });
-  // db.execute('SELECT * FROM products')
-  //   .then(result => {
-  //     res.render('shop/home', {
-  //       isLoggedIn: isLoggedIn,
-  //       pageTitle: 'home',
-  //       path: '/',
-  //       homeActive: true,
-  //       productCSS: true,
-  //       hasProducts: true,
-  //       products: result[0]
-  //     });
-  //   })
-  //   .catch(err => console.log(err));
 });
 
 app.use(errorController.getPageNotFound);
