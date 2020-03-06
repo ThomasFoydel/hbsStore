@@ -191,7 +191,8 @@ exports.getProduct = async (req, res) => {
     path: '/shop/product',
     product,
     productCSS: true,
-    authorName: foundUser.name
+    authorName: foundUser.name,
+    author: foundUser.id
   });
 };
 
