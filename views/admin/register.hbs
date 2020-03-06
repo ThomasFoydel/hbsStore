@@ -16,8 +16,8 @@
         <form class="register-form" action="/admin/register" method="POST">
             <h2>{{pageTitle}}</h2>
             <div class="form-control">
-                <label for="name">name</label>
-                <input type="text" name="name" id="name" class="
+                {{!-- <label for="name">name</label> --}}
+                <input placeholder="name" type="text" name="name" id="name" class="
                     {{#if nameMissing}} register-input-error {{/if}}
                     {{#if userNameAlreadyExists}} register-input-error {{/if}}
                     {{#if nameWrongLength}} register-input-error {{/if}}
@@ -29,8 +29,8 @@
                 </p>
             </div>
             <div class="form-control">
-                <label for="title">email</label>
-                <input type="email" name="email" id="email" class="
+                {{!-- <label for="title">email</label> --}}
+                <input placeholder="email" type="email" name="email" id="email" class="
                     {{#if emailMissing}} register-input-error {{/if}}
                     {{#if userEmailAlreadyExists}} register-input-error {{/if}}
                 ">
@@ -40,8 +40,8 @@
                 </p>
             </div>
             <div class="form-control">
-                <label for="password">password</label>
-                <input type="password" name="password" id="password" class="
+                {{!-- <label for="password">password</label> --}}
+                <input placeholder="password" type="password" name="password" id="password" class="
                     {{#if passwordMissing}} register-input-error {{/if}}
                     {{#if passwordsNotMatch}} register-input-error {{/if}}
                     {{#if passwordWrongLength}} register-input-error {{/if}}
@@ -53,8 +53,8 @@
                 </p>
             </div>
             <div class="form-control">
-                <label for="password">confirm password</label>
-                <input type="password" name="confirmpassword" id="confirmpassword" class="
+                {{!-- <label for="confirmpassword">confirm password</label> --}}
+                <input placeholder="confirm password" type="password" name="confirmpassword" id="confirmpassword" class="
                     {{#if passwordMissing}} register-input-error {{/if}}
                     {{#if passwordsNotMatch}} register-input-error {{/if}}
                     {{#if passwordWrongLength}} register-input-error {{/if}}

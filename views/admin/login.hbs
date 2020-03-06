@@ -16,16 +16,17 @@
         <form class="login-form" id="login-form" action="/admin/login" method="POST">
             <h2>{{pageTitle}}</h2>
             <div class="form-control">
-                <label for="email">email</label>
-                <input type="email" name="email" id="email" {{#if emailError}} class="login-input-error" {{/if}}>
+                {{!-- <label for="email">email</label> --}}
+                <input placeholder="email" type="email" name="email" id="email" {{#if emailError}}
+                    class="login-input-error" {{/if}}>
                 {{#if emailError}}
                 <p class="login-errormessage">no email associate with this account</p>
                 {{/if}}
             </div>
             <div class="form-control">
-                <label for="password">password</label>
-                <input type="password" name="password" id="password" {{#if passwordError}} class="login-input-error"
-                    {{/if}}>
+                {{!-- <label for="password">password</label> --}}
+                <input placeholder="password" type="password" name="password" id="password" {{#if passwordError}}
+                    class="login-input-error" {{/if}}>
                 {{#if passwordError}}
                 <p class="login-errormessage">incorrect password</p>
                 {{/if}}

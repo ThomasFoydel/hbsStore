@@ -1,12 +1,15 @@
 .form-control {
   margin: 1rem 0;
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  margin-bottom: 2rem;
 }
 
 .form-control label,
 .form-control input {
   display: block;
   width: 100%;
-  /* margin-bottom: 5rem; */
+  padding: 0.4rem 0.6rem;
 }
 
 .form-control input {
