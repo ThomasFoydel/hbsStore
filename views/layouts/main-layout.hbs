@@ -60,7 +60,7 @@
 
             {{#if isLoggedIn}}
             <form action="/admin/logout" method="post">
-                <button class="logout-button" type="submit">
+                <button class="logout-button logout-button-large" type="submit">
                     <li class="main-header__item">
                         Logout
                     </li>
@@ -103,7 +103,8 @@
             {{!-- </a> --}}
         </div>
 
-        <div class="main-header-small-collapse">
+        <div
+            class="main-header-small-collapse {{#if isLoggedIn}} small-collapse-loggedin {{else}} small-collapse-notloggedin {{/if}}">
 
             <a class="{{#if homeActive }}active{{/if}}" href="/">
                 <li class="main-header-small-item">

@@ -1,18 +1,25 @@
 const db = require('../util/database');
 
 module.exports = class CartItem {
-  constructor(p, c, pr, iU, s) {
-    console.log('req constructor: ', p, c, pr, iU, s);
+  constructor(p, c, pr, iU, s, t) {
     this.product = p;
     this.customer = c;
     this.price = pr;
     this.imageUrl = iU;
     this.seller = s;
+    this.title = t;
   }
   save() {
     return db.execute(
-      'INSERT INTO cartItems (product, customer, price, imageUrl, seller) VALUES (?,?,?,?,?)',
-      [this.product, this.customer, this.price, this.imageUrl, this.seller]
+      'INSERT INTO cartItems (product, customer, price, imageUrl, seller, title) VALUES (?,?,?,?,?,?)',
+      [
+        this.product,
+        this.customer,
+        this.price,
+        this.imageUrl,
+        this.seller,
+        this.title
+      ]
     );
   }
   static fetchAll() {

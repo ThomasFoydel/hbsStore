@@ -4,9 +4,21 @@
 .adminproducts-product {
   background: white;
   text-align: center;
-  width: 15rem;
+  width: 20rem;
   padding: 1.5rem;
-  height: 24rem;
+  height: 30rem;
+  margin: 1rem;
+}
+
+.adminproducts-container {
+  width: 100vw;
+  display: grid;
+  grid-gap: 1rem;
+  justify-items: center;
+  justify-content: space-around;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .adminproducts-product-title {

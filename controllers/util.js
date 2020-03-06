@@ -3,7 +3,6 @@ exports.quantifyCart = function(cart) {
   let quantifiedCart = [];
 
   cart.forEach(item => {
-    // console.log('ITEM!!!!!: ', item);
     if (productsSoFar.indexOf(item.product) === -1) {
       productsSoFar.push(item.product);
       quantifiedCart.push({

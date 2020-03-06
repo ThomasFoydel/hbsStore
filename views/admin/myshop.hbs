@@ -38,7 +38,11 @@
                             {{else}}
                             <div class="myshop-noproducts">
                                 <h2>You haven't listed any products yet...</h2>
-                                <a href="/admin/add-product">add a product</a>
+                                <a href="/admin/add-product">
+                                    <div class="myshop-noproducts-link">
+                                        add a product
+                                    </div>
+                                </a>
                             </div>
                             {{/if}}
 
@@ -62,16 +66,8 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                     </div>
                 </div>
-
-
             </div>
     </main>
     <div class="myshop-smallinfoboxfooter">
@@ -92,9 +88,9 @@
         const coverPicElement = document.querySelector(".myshop-coverpic");
         const coverPicUrl = coverPicElement.getAttribute("url");
         if (coverPicUrl) {
-            coverPicElement.style.background = `linear-gradient(180deg,rgba(0, 0, 0, 0.521) 0%,rgba(0, 0, 0, 0.5) 100%), url("${coverPicUrl}") no-repeat fixed center`;
+            coverPicElement.style.background = `linear-gradient(180deg,rgba(0, 0, 0, 0.521) 0%,rgba(0, 0, 0, 0.2) 100%), url("${coverPicUrl}") no-repeat fixed center`;
         } else {
-            coverPicElement.style.background = `linear-gradient(180deg, rgba(0, 0, 0, 0.521) 0%, rgba(0, 0, 0, 0.5) 100%), https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80`;
+            coverPicElement.style.background = `linear-gradient(180deg, rgba(0, 0, 0, 0.521) 0%, rgba(0, 0, 0, 0.2) 100%), https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80`;
         }
     </script>
 </body>

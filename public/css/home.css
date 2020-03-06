@@ -1,5 +1,8 @@
 .home-background {
-  background: radial-gradient(rgba(0, 0, 0, 0.512) 50%, rgba(0, 0, 0, 0.2) 100%),
+  background: radial-gradient(
+      rgba(0, 0, 0, 0.412) 50%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
     url('https://images.pexels.com/photos/2795605/pexels-photo-2795605.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500');
   background-position: center;
   background-repeat: no-repeat;

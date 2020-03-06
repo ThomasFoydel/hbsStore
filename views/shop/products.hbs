@@ -32,7 +32,8 @@
                     </p>
                 </div>
                 <div class="card__actions">
-                    <form action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&author={{author}}"
+                    <form
+                        action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&author={{author}}&title={{title}}"
                         method="POST">
                         <button class="btn" type="submit">Add to Cart</button>
                     </form>
@@ -42,9 +43,8 @@
         </div>
         {{ else}}
         <h1>no products found</h1>
-
-
         {{/if}}
+        <div class="products-space"></div>
     </main>
 </body>
 

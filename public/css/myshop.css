@@ -216,6 +216,27 @@
 
 .myshop-noproducts {
   margin-left: 1.5rem;
+  color: #eee;
+  cursor: default;
+}
+.myshop-noproducts-link {
+  color: rgb(145, 202, 255);
+  background: rgba(235, 235, 235, 0.31);
+  padding: 1rem 0;
+  margin-left: 5rem;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.myshop-noproducts-link:hover {
+  color: rgb(11, 67, 94);
+  background: rgba(235, 235, 235, 0.76);
+}
+@media (max-width: 1000px) {
+  .myshop-noproducts-link {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 1000px) {

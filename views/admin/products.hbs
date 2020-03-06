@@ -7,24 +7,28 @@
 
 <body>
     <h1 class="adminproducts-heading text-center">My Products</h1>
+
     {{#if hasProducts}}
-    <a href="/admin/add-product">add another product</a>
-    {{#each products}}
-    <div class="adminproducts-product">
-        <a href="/shop/product/{{id}}">
-            <h2 class="adminproducts-product-title">{{title}}</h2>
-        </a>
-        <p class="adminproducts-product-price">{{price}}</p>
-        <img class="adminproducts-product-image" src={{imageUrl}} />
-        <p class="adminproducts-product-description">{{description}}</p>
+    <div class="center"><a href="/admin/add-product">add another product</a></div>
+    <div class="adminproducts-container">
+        {{#each products}}
+        <div class="adminproducts-product">
+            <a href="/shop/product/{{id}}">
+                <h2 class="adminproducts-product-title">{{title}}</h2>
+            </a>
+            <p class="adminproducts-product-price">{{price}}</p>
+            <img class="adminproducts-product-image" src={{imageUrl}} />
+            <p class="adminproducts-product-description">{{description}}</p>
+        </div>
+        {{/each}}
     </div>
-    {{/each}}
     {{else}}
     <div class="adminproducts-noproducts text-center">
         <h2>You haven't listed any products yet...</h2>
         <a href="/admin/add-product">add a product</a>
     </div>
     {{/if}}
+    </div>
 </body>
 
 </html>

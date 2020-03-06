@@ -39,14 +39,14 @@ exports.getCart = async (req, res) => {
 };
 
 exports.addToCart = (req, res) => {
-  console.log('ADDDDD');
   if (req.session.userId) {
     const newCartItem = new CartItem(
       req.params.productid,
       req.session.userId,
       req.query.price,
       req.query.imageUrl,
-      req.query.author
+      req.query.author,
+      req.query.title
     );
     newCartItem
       .save()

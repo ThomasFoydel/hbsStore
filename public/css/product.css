@@ -39,3 +39,13 @@
   margin-left: 50%;
   transform: translateX(-50%);
 }
+
+.product-space {
+  height: 20rem;
+  width: 100vw;
+}
+
+.products-space {
+  height: 25rem;
+  width: 100vw;
+}
