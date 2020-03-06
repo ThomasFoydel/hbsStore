@@ -14,33 +14,36 @@
         <div class="myshop-coverpic" url="{{coverPic}}">
             <div class="container myshop-container">
                 <div class="row myshop-mainrow">
-                    <div class="col-8">
+                    <div class="col-8 no-padding">
                         <div class="row">
-                            <h1 class="myshop-shoptitle jumbotron">{{shopTitle}}</h1>
+                            <h1 class="myshop-shoptitle">{{shopTitle}}</h1>
                         </div>
-                        <div class="row">
+                        {{!-- <div class="row "> --}}
 
-                            <div class="myshop-products-section">
-                                {{#if hasProducts}}
-                                {{#each products}}
-                                <div class="myshop-product">
-                                    <a href="/shop/product/{{id}}">
-                                        <h2 class="myshop-product-title text-center">{{title}}</h2>
-                                        <p class="myshop-product-price text-center">{{price}}</p>
-                                        <img class="myshop-product-image text-center" src={{imageUrl}} />
-                                        <p class="myshop-product-description text-center">{{description}}</p>
-                                    </a>
-                                </div>
-                                {{/each}}
+                        <div class="myshop-products-section row">
+                            {{#if hasProducts}}
 
-                                {{else}}
-                                <div class="myshop-noproducts">
-                                    <h2>You haven't listed any products yet...</h2>
-                                    <a href="/admin/add-product">add a product</a>
-                                </div>
-                                {{/if}}
+                            {{#each products}}
+                            <div class="myshop-product">
+                                <a href="/shop/product/{{id}}">
+                                    <h2 class="myshop-product-title text-center">{{title}}</h2>
+                                    <p class="myshop-product-price text-center">{{price}}</p>
+                                    <img class="myshop-product-image text-center" src={{imageUrl}} />
+                                    <p class="myshop-product-description text-center">{{description}}</p>
+                                </a>
                             </div>
+                            {{/each}}
+                            <div class="myshop-productspace"></div>
+
+                            {{else}}
+                            <div class="myshop-noproducts">
+                                <h2>You haven't listed any products yet...</h2>
+                                <a href="/admin/add-product">add a product</a>
+                            </div>
+                            {{/if}}
+
                         </div>
+                        {{!-- </div> --}}
                     </div>
 
                     <div class="col-4 myshop-sidebar">
@@ -73,7 +76,7 @@
     </main>
     <div class="myshop-smallinfoboxfooter">
         <div class="text-center">
-            <span class="myshop-name text-center">{{name}} /</span>
+            <span class="myshop-name text-center">{{name}} - </span>
             <span class="myshop-email text-center">{{email}} </span>
         </div>
 
