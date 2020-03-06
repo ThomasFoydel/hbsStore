@@ -11,9 +11,11 @@
 }
 
 .product-item {
-  width: 20rem;
+  width: 90%;
   max-width: 95%;
   background: white;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .product__title {

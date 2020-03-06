@@ -180,14 +180,14 @@ exports.checkout = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
   const { isLoggedIn } = req.session;
-  const responseFromDb = await Product.findById(req.params.id);
-  const product = responseFromDb[0][0];
+  const productResponseFromDb = await Product.findById(req.params.id);
+  const product = productResponseFromDb[0][0];
   const userResponseFromDb = await User.findById(product.author);
   const foundUser = userResponseFromDb[0][0];
 
   res.render('shop/product', {
     isLoggedIn: isLoggedIn,
-    pageTitle: 'Shop',
+    pageTitle: product.title,
     path: '/shop/product',
     product,
     productCSS: true,
