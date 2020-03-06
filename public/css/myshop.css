@@ -136,7 +136,6 @@
   color: white;
   backdrop-filter: blur(10px);
   padding: 1rem 0rem;
-  z-index: 5;
 }
 .myshop-product:hover {
   transform: scale(1.1);
