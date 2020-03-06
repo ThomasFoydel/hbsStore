@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/adminproducts.css" </head>
 
 <body>
-    <h1 class="adminproducts-heading">My Products</h1>
+    <h1 class="adminproducts-heading text-center">My Products</h1>
     {{#if hasProducts}}
     <a href="/admin/add-product">add another product</a>
     {{#each products}}
@@ -20,7 +20,7 @@
     </div>
     {{/each}}
     {{else}}
-    <div class="adminproducts-noproducts">
+    <div class="adminproducts-noproducts text-center">
         <h2>You haven't listed any products yet...</h2>
         <a href="/admin/add-product">add a product</a>
     </div>
