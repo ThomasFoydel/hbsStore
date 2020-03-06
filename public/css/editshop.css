@@ -1,0 +1,17 @@
+.editshop-submitbutton {
+  transform: translateX(-50%);
+  margin-left: 50%;
+  width: 30rem;
+}
+
+.editshop-container {
+  width: 80%;
+  transform: translateX(-50%);
+  margin-left: 50%;
+}
+
+.editshop-title {
+  font-size: 8rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

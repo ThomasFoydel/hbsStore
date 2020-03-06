@@ -7,7 +7,6 @@
 .product-form h2 {
   font-size: 8rem;
   text-align: center;
-  height: 4rem;
   color: rgb(29, 29, 29);
 }
 
@@ -33,7 +32,7 @@
 }
 
 .addproduct-button {
-  margin-top: 1.2rem;
+  margin-top: 1.4rem;
   min-width: 75%;
   margin-left: 50%;
   transform: translateX(-50%);
