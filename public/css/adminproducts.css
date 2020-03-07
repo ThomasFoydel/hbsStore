@@ -2,12 +2,15 @@
   font-size: 8rem;
 }
 .adminproducts-product {
-  background: white;
   text-align: center;
   width: 20rem;
   padding: 1.5rem;
   height: 30rem;
   margin: 1rem;
+  background: linear-gradient(135deg, rgb(218, 218, 218), rgb(249, 254, 255));
+  box-shadow: 2rem 2rem 6rem rgba(0, 0, 0, 0.18),
+    -2rem -2rem 6rem rgba(232, 252, 255, 0.4);
+  border-radius: 1rem;
 }
 
 .adminproducts-container {
@@ -19,6 +22,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   grid-template-columns: repeat(2, 1fr);
+  padding: 5rem 0;
 }
 
 .adminproducts-product-title {

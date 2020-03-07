@@ -2,8 +2,6 @@
   transform: translateX(-50%);
   margin-left: 50%;
   width: 27.5rem;
-  /* margin-top: 1.5rem;
-  margin-bottom: 4rem; */
 }
 
 .editshop-container {
@@ -33,7 +31,7 @@
   width: 80%;
 }
 
-.shop-title-button,
-.bio-button {
-  margin-bottom: 3rem;
+.editshop-form {
+  height: 10rem;
+  margin-bottom: 1.8rem;
 }

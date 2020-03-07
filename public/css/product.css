@@ -16,6 +16,10 @@
   background: white;
   margin-left: 50%;
   transform: translateX(-50%);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgb(228, 228, 228), rgb(249, 254, 255));
+  box-shadow: 2rem 2rem 6rem rgba(0, 0, 0, 0.18),
+    -2rem -2rem 6rem rgba(232, 252, 255, 0.4);
 }
 
 .product__title {
@@ -29,6 +33,7 @@
   letter-spacing: 1.4rem;
   margin-left: -1.4rem;
 }
+
 @media (max-width: 1000px) {
   .product-title-large {
     font-size: 6.5rem;

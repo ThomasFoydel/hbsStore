@@ -129,13 +129,20 @@
 .myshop-product {
   margin: 1rem;
   background: rgba(161, 161, 161, 0.096);
-  width: 19rem;
-  height: 26rem;
+  width: 14rem;
+  height: 22rem;
   transition: all 0.3s ease;
   cursor: pointer;
   color: white;
   backdrop-filter: blur(10px);
   padding: 1rem 0rem;
+}
+
+@media (max-width: 1000px) {
+  .myshop-product {
+    width: 22rem;
+    height: 30rem;
+  }
 }
 .myshop-product:hover {
   transform: scale(1.1);

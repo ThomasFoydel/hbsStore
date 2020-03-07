@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{pageTitle}}</title>
-    {{!-- <link rel="stylesheet" href="/css/main.css"> --}}
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/editshop.css">
 
@@ -22,8 +21,7 @@
             <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
                 {{#if email}}<p>email: {{email}}</p>{{/if}}
                 <div class="form-control">
-                    <input placeholder="email" type="email" name="email" id="email"
-                        {{!-- {{#if emailError}} class="editshop-input-error" {{/if}} --}}>
+                    <input placeholder="email" type="email" name="email" id="email">
                 </div>
                 <button class="btn editshop-submitbutton" type="submit">change email</button>
             </form>
@@ -32,31 +30,37 @@
             <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
                 {{#if name}} <p>name: {{name}}</p>{{/if}}
                 <div class="form-control">
-                    <input placeholder="name" type="text" name="name" id="name"
-                        {{!-- {{#if emailError}} class="editshop-input-error" {{/if}} --}}>
+                    <input placeholder="name" type="text" name="name" id="name">
                 </div>
                 <button class="btn editshop-submitbutton" type="submit">change name</button>
             </form>
 
-            <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
+            {{!-- <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
                 <div class="form-control">
                     {{#if bio}} <p>bio: {{bio}}</p>{{/if}}
-                    <input placeholder="bio" type="text" name="bio" id="bio"
-                        {{!-- {{#if emailError}} class="editshop-input-error" {{/if}} --}}>
+                    <input placeholder="bio" type="text" name="bio" id="bio">
                 </div>
                 <button class="btn editshop-submitbutton bio-button" type="submit">change bio</button>
+            </form> --}}
+
+
+            <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
+                {{#if bio}} <p>bio: {{bio}}</p>{{/if}}
+                <div class="form-control">
+                    <input placeholder="bio" type="text" name="bio" id="bio">
+                </div>
+                <button class="btn editshop-submitbutton" type="submit">change bio</button>
             </form>
 
             <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
+                {{#if shopTitle}} <p>shop title: {{shopTitle}}</p>{{/if}}
                 <div class="form-control">
-                    {{#if shopTitle}}<p>shop title: {{shopTitle}}</p>{{/if}}
-                    <input placeholder="shop title" type="text" name="shopTitle" id="shoptitle">
-                    {{!-- {{#if passwordError}}
-                <p class="editshop-errormessage">incorrect password</p>
-                {{/if}} --}}
+                    <input placeholder="shop title" type="text" name="shopTitle" id="shopTitle">
                 </div>
-                <button class="btn editshop-submitbutton shop-title-button" type="submit">change shop title</button>
+                <button class="btn editshop-submitbutton" type="submit">change shop title</button>
             </form>
+
+
 
             {{#if profilePic}} <img class="editshop-profilepic" src="{{profilePic}}"> {{/if}}
             <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
