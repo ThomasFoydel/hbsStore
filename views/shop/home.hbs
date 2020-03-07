@@ -29,10 +29,10 @@
 
             {{#each products}}
             <article class="card product-item">
-                <header class="card__header">
-                    <h1 class="product__title">{{title}}</h1>
+                <header class="card-top">
+                    <h1 class="product-title">{{title}}</h1>
                 </header>
-                <div class="card__image">
+                <div class="card-image">
                     {{#if imageUrl}}
                     <img src={{imageUrl}} alt="product">
                     {{else}}
@@ -40,11 +40,11 @@
                         alt="A Book">
                     {{/if}}
                 </div>
-                <div class="card__content">
-                    <h2 class="product__price">${{price}}</h2>
-                    <p class="product__description">{{description}}</p>
+                <div class="card-content">
+                    <h2 class="product-price">${{price}}</h2>
+                    <p class="product-description">{{description}}</p>
                 </div>
-                <div class="card__actions">
+                <div class="card-actions">
                     <form action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&author={{author}}"
                         method="POST">
 

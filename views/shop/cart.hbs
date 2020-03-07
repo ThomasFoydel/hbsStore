@@ -21,7 +21,7 @@
 
             <img src={{imageUrl}} class="cart-item-img">
             <p>quantity: {{quantity}}</p>
-            <p>price: {{price}}</p>
+            <p>${{price}}</p>
 
             <form action="/shop/remove-from-cart/{{id}}" method="POST" class="cart-removebutton">
                 <button class="btn" type="submit">remove</button>

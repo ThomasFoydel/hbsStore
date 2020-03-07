@@ -18,7 +18,6 @@
                         <div class="row">
                             <h1 class="myshop-shoptitle">{{shopTitle}}</h1>
                         </div>
-                        {{!-- <div class="row "> --}}
 
                         <div class="myshop-products-section row">
                             {{#if hasProducts}}
@@ -27,9 +26,8 @@
                             <div class="myshop-product">
                                 <a href="/shop/product/{{id}}">
                                     <h2 class="myshop-product-title text-center">{{title}}</h2>
-                                    <p class="myshop-product-price text-center">{{price}}</p>
+                                    <p class="myshop-product-price text-center">${{price}}</p>
                                     <img class="myshop-product-image text-center" src={{imageUrl}} />
-                                    <p class="myshop-product-description text-center">{{description}}</p>
                                 </a>
                             </div>
                             {{/each}}
@@ -45,9 +43,7 @@
                                 </a>
                             </div>
                             {{/if}}
-
                         </div>
-                        {{!-- </div> --}}
                     </div>
 
                     <div class="col-4 myshop-sidebar">

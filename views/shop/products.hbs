@@ -16,22 +16,22 @@
         <div class="grid">
             {{#each prods}}
             <article class="card product-item">
-                <header class="card__header">
+                <header class="card-top">
                     <a href="/shop/product/{{id}}">
-                        <h1 class="product__title">{{title}}</h1>
+                        <h1 class="product-title">{{title}}</h1>
                     </a>
                 </header>
 
-                <a class="text-center" href="/shop/store/{{author}}">by {{seller}}</a>
-                <div class="card__image">
+                <span class="text-center mb-2">by <a href="/shop/store/{{author}}">{{seller}}</a></span>
+                <div class="card-image">
                     <img src={{imageUrl}} alt="A Book">
                 </div>
-                <div class="card__content">
-                    <h2 class="product__price">${{price}}</h2>
-                    <p class="product__description">{{description}}
+                <div class="card-content">
+                    <h2 class="product-price">${{price}}</h2>
+                    <p class="product-description">{{description}}
                     </p>
                 </div>
-                <div class="card__actions">
+                <div class="card-actions">
                     <form
                         action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&author={{author}}&title={{title}}"
                         method="POST">

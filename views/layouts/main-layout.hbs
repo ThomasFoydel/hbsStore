@@ -19,39 +19,39 @@
 </head>
 
 <body>
-    <div class="main-header__space"></div>
+    <div class="main-header-space"></div>
     <header class="main-header">
-        <nav class="main-header__nav">
-            <ul class="main-header__item-list">
+        <nav class="main-header-nav">
+            <ul class="main-header-item-list">
 
                 <a href="/">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         <img class="logo" src="/img/logo.svg">
                     </li>
                 </a>
                 </li>
 
                 <a class="{{#if activeProducts }}active{{/if}}" href="/shop/products">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         Products
                     </li>
                 </a>
 
                 {{#if isLoggedIn}}
                 <a class="{{#if activeCart }}active{{/if}}" href="/shop/cart">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         Cart
                     </li>
                 </a>
 
                 <a class="{{#if activeMyProducts }}active{{/if}}" href="/admin/products">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         My Products
                     </li>
                 </a>
 
                 <a class="{{#if activeMyShop }}active{{/if}}" href="/admin/myshop">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         My Shop
                     </li>
                 </a>
@@ -61,21 +61,21 @@
             {{#if isLoggedIn}}
             <form action="/admin/logout" method="post">
                 <button class="logout-button logout-button-large" type="submit">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         Logout
                     </li>
                 </button>
             </form>
             {{else}}
 
-            <ul class="main-header__item-list">
+            <ul class="main-header-item-list">
                 <a class="{{#if activeLogin }}active{{/if}}" href="/admin/login">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         Login
                     </li>
                 </a>
                 <a class="{{#if activeRegister }}active{{/if}}" href="/admin/register">
-                    <li class="main-header__item">
+                    <li class="main-header-item">
                         Register
                     </li>
                 </a>
@@ -88,7 +88,7 @@
     ========================   SMALL HEADER   =======================
     --}}
     <header class="main-header-small">
-        <div class="main-header__item-list">
+        <div class="main-header-item-list">
 
             <a href="/">
                 <li class="main-header-small-item">

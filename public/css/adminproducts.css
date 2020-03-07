@@ -21,8 +21,18 @@
   justify-content: space-around;
   overflow-y: scroll;
   overflow-x: hidden;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 5rem 0;
+}
+@media (max-width: 1220px) {
+  .adminproducts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  .adminproducts-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .adminproducts-product-title {

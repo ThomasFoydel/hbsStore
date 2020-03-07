@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Oxanium', sans-serif;
-  background: rgb(226, 226, 226);
+  background: rgb(206, 206, 206);
   padding: 0;
   margin: 0;
 }
@@ -23,6 +23,7 @@ a:hover {
 button:focus {
   outline: 0;
 }
+
 .center {
   margin-left: 50%;
   transform: translateX(-50%);
@@ -38,12 +39,12 @@ button:focus {
   z-index: 3;
 }
 
-.main-header__space {
+.main-header-space {
   width: 100%;
   height: 3.8rem;
 }
 
-.main-header__nav {
+.main-header-nav {
   height: 100%;
   display: flex;
   align-items: center;
@@ -79,7 +80,7 @@ button:focus {
   .main-header {
     display: none;
   }
-  .main-header__space {
+  .main-header-space {
     height: 5.8rem;
   }
   .main-header-small {
@@ -87,14 +88,14 @@ button:focus {
   }
 }
 
-.main-header__item-list {
+.main-header-item-list {
   margin: 0;
   padding: 0;
   display: flex;
   white-space: nowrap;
 }
 
-.main-header__item {
+.main-header-item {
   min-height: 3.8rem !important;
   padding: 0 1.3rem;
   padding-top: 1.2rem;
@@ -115,12 +116,12 @@ button:focus {
   font-size: 1.9rem;
 }
 
-.main-header__item:hover,
+.main-header-item:hover,
 .main-header-small-item:hover {
   background: rgba(0, 0, 0, 0.055);
 }
 
-.main-header__item:hover .logo {
+.main-header-item:hover .logo {
   transform: scale(1.1) rotate(360deg);
 }
 
@@ -143,9 +144,9 @@ button:focus {
   position: inherit;
 }
 
-.main-header__item:hover,
-.main-header__item:active,
-.main-header__item:active,
+.main-header-item:hover,
+.main-header-item:active,
+.main-header-item:active,
 .active li {
   color: #ffba3b;
 }
@@ -157,38 +158,39 @@ button:focus {
 }
 
 .card {
+  border: none;
   margin: 2rem;
   box-shadow: 2rem 2rem 8rem rgba(0, 0, 0, 0.28),
     -2rem -2rem 8rem rgba(216, 250, 255, 0.3);
 }
 
-.card__header,
-.card__content {
+.card-top,
+.card-content {
   padding: 1rem;
 }
 
-.card__header h1,
-.card__content h1,
-.card__content h2,
-.card__content p {
+.card-top h1,
+.card-content h1,
+.card-content h2,
+.card-content p {
   margin: 0;
 }
 
-.card__image {
+.card-image {
   width: 100%;
 }
 
-.card__image img {
+.card-image img {
   width: 100%;
 }
 
-.card__actions {
+.card-actions {
   padding: 1rem;
   text-align: center;
 }
 
-.card__actions button,
-.card__actions a {
+.card-actions button,
+.card-actions a {
   margin: 0 0.25rem;
 }
 

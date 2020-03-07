@@ -263,3 +263,29 @@ exports.postEditShop = async (req, res) => {
     renderEditShop();
   }
 };
+
+exports.getEditProduct = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+  const { id } = req.params;
+
+  const productDbResponse = await Product.findById(id);
+  const product = productDbResponse[0][0];
+
+  const userDbResponse = await User.findById(userId);
+  const user = userDbResponse[0][0];
+
+  return res.render('admin/edit-product', {
+    isLoggedIn: isLoggedIn,
+    pageTitle: 'Edit Product',
+    path: '/admin/edit-product',
+    product: product,
+    user: user
+    // userId: userId,
+    // name: name,
+    // email: email,
+    // shopTitle: shopTitle,
+    // coverPic: coverPic,
+    // profilePic: profilePic,
+    // bio: bio
+  });
+};

@@ -15,14 +15,16 @@
   max-width: 95%;
   background: white;
   margin-left: 50%;
+  margin-bottom: 6rem;
   transform: translateX(-50%);
   border-radius: 1rem;
-  background: linear-gradient(135deg, rgb(228, 228, 228), rgb(249, 254, 255));
-  box-shadow: 2rem 2rem 6rem rgba(0, 0, 0, 0.18),
-    -2rem -2rem 6rem rgba(232, 252, 255, 0.4);
+  background: linear-gradient(135deg, rgb(233, 233, 233), rgb(249, 252, 253));
+  box-shadow: 3rem 3rem 6rem rgba(0, 0, 0, 0.18),
+    -3rem -3rem 6rem rgba(243, 253, 255, 0.55);
+  padding: 0.5rem 0 1.5rem 0;
 }
 
-.product__title {
+.product-title {
   font-size: 1.7rem;
   text-align: center;
 }
@@ -42,13 +44,13 @@
   }
 }
 
-.product__price {
+.product-price {
   text-align: center;
   color: #222222;
   margin-bottom: 1rem;
 }
 
-.product__description {
+.product-description {
   text-align: center;
 }
 
@@ -67,4 +69,9 @@
 .products-space {
   height: 25rem;
   width: 100vw;
+}
+
+.center-this div {
+  background: orange !important;
+  border: 1px dotted black !important;
 }
