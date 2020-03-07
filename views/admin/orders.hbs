@@ -3,11 +3,34 @@
 
 <head>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/admin-products.css">
+    <link rel="stylesheet" href="/css/orders.css">
 </head>
 
 <body>
-    <h1 class="adminproducts-heading text-center">My Products</h1>
+    <h1>ORDERS</h1>
+
+    {{#if orders}}
+
+    {{#each orders}}
+    <div class="order">
+        <h2 class="center">price: ${{price}}</h2>
+
+        Products:
+        {{#each products}}
+        <div class="orders-product center">
+            <p class="center">quantity: {{quantity}}</p>
+            <p class="center">total price: ${{totalPrice}}</p>
+            <img class="orders-product-img" src="{{imageUrl}}">
+        </div>
+        {{/each}}
+
+
+    </div>
+    {{/each}} {{else}} <h2>no outstanding orders</h2>
+
+    {{/if}}
+
+    {{!-- <h1 class="adminproducts-heading text-center">My Products</h1>
 
     {{#if hasProducts}}
     <div class="center"><a href="/admin/add-product">add another product</a></div>
@@ -30,7 +53,7 @@
         <a href="/admin/add-product">add a product</a>
     </div>
     {{/if}}
-    </div>
+    </div> --}}
 
 </body>
 

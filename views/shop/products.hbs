@@ -31,6 +31,9 @@
                     <p class="product-description">{{description}}
                     </p>
                 </div>
+                {{#if authorIsCurrentUser}}
+                <a class="center" href="/admin/edit-product/{{id}}">edit</a>
+                {{else}}
                 <div class="card-actions">
                     <form
                         action="/shop/add-to-cart/{{id}}?price={{price}}&imageUrl={{imageUrl}}&author={{author}}&title={{title}}"
@@ -38,6 +41,7 @@
                         <button class="btn" type="submit">Add to Cart</button>
                     </form>
                 </div>
+                {{/if}}
             </article>
             {{/each}}
         </div>

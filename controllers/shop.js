@@ -66,7 +66,7 @@ async function asyncForEach(array, callback) {
 }
 
 exports.getProducts = (req, res) => {
-  const { isLoggedIn } = req.session;
+  const { isLoggedIn, userId } = req.session;
 
   db.execute('SELECT * FROM products').then(result => {
     let products = result[0];
@@ -76,6 +76,9 @@ exports.getProducts = (req, res) => {
       await asyncForEach(products, async product => {
         const userDbResponse = await User.findById(product.author);
         product.seller = userDbResponse[0][0].name;
+        if (product.author === userId) {
+          product.authorIsCurrentUser = true;
+        }
       });
       return products;
     };

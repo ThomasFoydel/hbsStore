@@ -48,18 +48,22 @@
 
                     <div class="col-4 myshop-sidebar">
                         <div class="row justify-content-center">
+
                             <img class="myshop-profilepicture"
                                 src="{{#if profilePic}}{{profilePic}}{{else}}https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80{{/if}}">
 
                             <div class="myshop-infobox">
 
                                 <h1 class="myshop-name text-center">{{name}}</h1>
-
                                 <h6 class="myshop-email text-center">{{email}} </h6>
-
                                 <div class="row justify-content-center">
                                     <a class="myshop-editlink" href="/admin/edit-shop">edit my shop</a>
                                 </div>
+                                <div class="row justify-content-center">
+                                    <a class="myshop-orderslink" href="/admin/orders/{{userId}}">orders</a>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>

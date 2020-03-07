@@ -73,7 +73,7 @@ app.use('/', (req, res) => {
   const { isLoggedIn } = req.session;
   res.render('shop/home', {
     isLoggedIn: isLoggedIn,
-    pageTitle: 'home',
+    pageTitle: 'Home',
     path: '/',
     homeActive: true
   });

@@ -37,17 +37,29 @@
 
 .myshop-name,
 .myshop-email,
-.myshop-shoptitle,
-.myshop-editlink {
+.myshop-shoptitle {
   color: #eee;
   transition: all 0.3s ease;
+}
+
+.myshop-editlink,
+.myshop-orderslink {
+  padding: 0.2rem 0.5rem;
+  border: #bd0074 1px solid;
+  color: #880054;
+  transition: all 0.3s ease;
+  margin-bottom: 0.3rem;
+  background: rgba(255, 255, 255, 0.453);
 }
 .myshop-name,
 .myshop-email {
   cursor: default;
 }
-.myshop-editlink:hover {
-  color: rgb(144, 199, 255);
+.myshop-editlink:hover,
+.myshop-orderslink:hover {
+  /* color: rgb(144, 199, 255); */
+  color: rgb(255, 255, 255);
+  background: #bd0074;
 }
 
 .myshop-shoptitle {

@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const Product = require('../models/product');
 const User = require('../models/user');
+const Order = require('../models/order');
 
 const registerValidator = require('../util/registerValidator');
 
@@ -187,7 +188,8 @@ exports.getMyShop = async (req, res) => {
       profilePic: profilePic,
       bio: bio,
       hasProducts: thisUserHasProducts,
-      products: listOfCurrentUsersProducts
+      products: listOfCurrentUsersProducts,
+      userId: userId
     });
   } else {
     res.redirect('/admin/login');
@@ -327,4 +329,18 @@ exports.postEditProduct = async (req, res) => {
 
     return res.redirect(`/admin/edit-product/${id}`);
   }
+};
+
+exports.getOrders = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+
+  const orderDbResponse = await Order.findBySeller(userId);
+  const ordersArray = orderDbResponse[0];
+  // console.log(ordersArray[0].products);
+  res.render('admin/orders', {
+    isLoggedIn: isLoggedIn,
+    pageTitle: 'Orders',
+    path: '/admin/orders',
+    orders: ordersArray
+  });
 };

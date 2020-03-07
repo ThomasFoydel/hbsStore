@@ -1,0 +1,15 @@
+.order {
+  background: #ddd;
+  padding: 1rem;
+  width: 16rem;
+}
+
+.orders-product-img {
+  width: 100%;
+}
+
+.orders-product {
+  background: white;
+  padding: 1rem 0;
+  width: 14rem;
+}

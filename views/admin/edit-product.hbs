@@ -23,24 +23,20 @@
                 <p class="editproduct-description">{{product.description}}</p>
             </div>
 
-
             <div class="editproduct-form-section">
                 <form class="editproduct-form" id="editproduct-form" action="/admin/edit-product/{{product.id}}"
                     method="POST">
                     <div class="form-control">
                         <input class="center" placeholder="title" type="text" name="title" id="title">
                     </div>
-                    {{!-- <button class="btn editproduct-submitbutton center" type="submit">change title</button> --}}
 
                     <div class="form-control">
                         <input class="center" placeholder="image url" type="text" name="imageUrl" id="imageUrl">
                     </div>
-                    {{!-- <button class="btn editproduct-submitbutton center" type="submit">change image url</button> --}}
 
                     <div class="form-control">
                         <input class="center" placeholder="price" type="text" name="price" id="price">
                     </div>
-                    {{!-- <button class="btn editproduct-submitbutton center" type="submit">change price</button> --}}
 
                     <div class="form-control">
                         <input class="center" placeholder="description" type="text" name="description" id="description">
@@ -50,9 +46,6 @@
             </div>
 
         </div>
-
-
-
         <div class="editproduct-space"></div>
     </main>
 </body>
