@@ -41,4 +41,7 @@ router.post('/edit-shop', adminController.postEditShop);
 // /admin/edit-product => GET
 router.get('/edit-product/:id', adminController.getEditProduct);
 
+// /admin/edit-product => POST
+router.post('/edit-product/:id', adminController.postEditProduct);
+
 module.exports = router;

@@ -15,64 +15,43 @@
     <main>
         <h2 class="editproduct-pagetitle text-center">{{pageTitle}}</h2>
 
-        <div class="editproduct-product center">
-
-            <h1 class="editproduct-title">{{product.title}}</h1>
-            <img class="editproduct-img center" src="{{product.imageUrl}}">
-            <p class="editproduct-price mt-3">${{product.price}}</p>
-            <p class="editproduct-description">{{product.description}}</p>
-        </div>
-
-
-        <div class="editproduct-form-section">
-            <form class="editproduct-form" id="editproduct-form" action="/admin/edit-product/{{product.id}}"
-                method="POST">
-                <div class="form-control">
-                    <input class="center" placeholder="title" type="text" name="title" id="title">
-                </div>
-                <button class="btn editproduct-submitbutton center" type="submit">change title</button>
-
-                <div class="form-control">
-                    <input class="center" placeholder="image url" type="text" name="imageUrl" id="imageUrl">
-                </div>
-                <button class="btn editproduct-submitbutton center" type="submit">change image url</button>
-
-                <div class="form-control">
-                    <input class="center" placeholder="price" type="text" name="price" id="price">
-                </div>
-                <button class="btn editproduct-submitbutton center" type="submit">change price</button>
-            </form>
-
-            <div class="form-control">
-                <input class="center" placeholder="description" type="text" name="description" id="description">
+        <div class="editproduct-grid">
+            <div class="editproduct-product center">
+                <h1 class="editproduct-title">{{product.title}}</h1>
+                <img class="editproduct-img center" src="{{product.imageUrl}}">
+                <p class="editproduct-price mt-3">${{product.price}}</p>
+                <p class="editproduct-description">{{product.description}}</p>
             </div>
-            <button class="btn editproduct-submitbutton center" type="submit">change description</button>
+
+
+            <div class="editproduct-form-section">
+                <form class="editproduct-form" id="editproduct-form" action="/admin/edit-product/{{product.id}}"
+                    method="POST">
+                    <div class="form-control">
+                        <input class="center" placeholder="title" type="text" name="title" id="title">
+                    </div>
+                    {{!-- <button class="btn editproduct-submitbutton center" type="submit">change title</button> --}}
+
+                    <div class="form-control">
+                        <input class="center" placeholder="image url" type="text" name="imageUrl" id="imageUrl">
+                    </div>
+                    {{!-- <button class="btn editproduct-submitbutton center" type="submit">change image url</button> --}}
+
+                    <div class="form-control">
+                        <input class="center" placeholder="price" type="text" name="price" id="price">
+                    </div>
+                    {{!-- <button class="btn editproduct-submitbutton center" type="submit">change price</button> --}}
+
+                    <div class="form-control">
+                        <input class="center" placeholder="description" type="text" name="description" id="description">
+                    </div>
+                    <button class="btn editproduct-submitbutton center" type="submit">update product</button>
+                </form>
+            </div>
 
         </div>
-        {{!-- <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
-                {{#if email}}<p>email: {{email}}</p>{{/if}}
-                <div class="form-control">
-                    <input placeholder="email" type="email" name="email" id="email">
-                </div>
-                <button class="btn editshop-submitbutton" type="submit">change email</button>
-            </form> --}}
 
 
-
-
-
-
-
-        {{!-- 
-            {{#if coverPic}} <img class="editshop-coverpic" src="{{coverPic}}"> {{/if}}
-            <form class="editshop-form" id="editshop-form" action="/admin/edit-shop" method="POST">
-
-                <div class="form-control">
-                    <input placeholder="cover picture url" type="text" name="coverPic" id="coverPic">
-
-                </div>
-                <button class="btn editshop-submitbutton" type="submit">change cover picture url</button>
-            </form> --}}
 
         <div class="editproduct-space"></div>
     </main>

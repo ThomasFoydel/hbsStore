@@ -7,6 +7,9 @@
     -2rem -2rem 6rem rgba(232, 252, 255, 0.4);
   border-radius: 1rem;
   padding: 1rem 0;
+  cursor: default;
+  margin-top: 1.5rem;
+  max-height: 100%;
 }
 
 .editproduct-img {
@@ -29,10 +32,24 @@
 }
 
 .form-control {
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .form-control input {
   width: 70%;
   min-width: 28rem;
+}
+
+.editproduct-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 2px;
+  grid-row-gap: 0px;
+}
+
+@media (max-width: 1000px) {
+  .editproduct-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

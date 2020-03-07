@@ -174,9 +174,9 @@ exports.getMyShop = async (req, res) => {
     const dbUserResponse = await User.findById(userId);
     const foundUser = dbUserResponse[0][0];
     const { name, email, shopTitle, coverPic, profilePic, bio } = foundUser;
-    res.render('admin/myshop', {
+    res.render('admin/my-shop', {
       isLoggedIn: isLoggedIn,
-      path: '/admin/myshop',
+      path: '/admin/my-shop',
       activeMyShop: true,
       // productCSS: true,
       pageTitle: shopTitle ? shopTitle : 'my shop',
@@ -268,24 +268,63 @@ exports.getEditProduct = async (req, res) => {
   const { userId, isLoggedIn } = req.session;
   const { id } = req.params;
 
-  const productDbResponse = await Product.findById(id);
-  const product = productDbResponse[0][0];
+  if (!isLoggedIn) {
+    return res.redirect('/');
+  }
 
+  const productDbResponse = await Product.findById(id);
   const userDbResponse = await User.findById(userId);
+  const product = productDbResponse[0][0];
   const user = userDbResponse[0][0];
 
-  return res.render('admin/edit-product', {
-    isLoggedIn: isLoggedIn,
-    pageTitle: 'Edit Product',
-    path: '/admin/edit-product',
-    product: product,
-    user: user
-    // userId: userId,
-    // name: name,
-    // email: email,
-    // shopTitle: shopTitle,
-    // coverPic: coverPic,
-    // profilePic: profilePic,
-    // bio: bio
-  });
+  if (product.author !== user.id) {
+    return res.redirect('/admin/products');
+  } else {
+    return res.render('admin/edit-product', {
+      isLoggedIn: isLoggedIn,
+      pageTitle: 'Edit Product',
+      path: '/admin/edit-product',
+      product: product,
+      user: user
+    });
+  }
+};
+
+exports.postEditProduct = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+  const { id } = req.params;
+  const { title, imageUrl, price, description } = req.body;
+
+  const productDbResponse = await Product.findById(id);
+  const product = productDbResponse[0][0];
+  const userDbResponse = await User.findById(userId);
+  const user = userDbResponse[0][0];
+  if (product.author !== user.id) {
+    return res.redirect('/admin/products');
+  } else {
+    if (title) {
+      const updatedProduct = await Product.update('title', title, id, userId);
+    }
+    if (imageUrl) {
+      const updatedProduct = await Product.update(
+        'imageUrl',
+        imageUrl,
+        id,
+        userId
+      );
+    }
+    if (price) {
+      const updatedProduct = await Product.update('price', price, id, userId);
+    }
+    if (description) {
+      const updatedProduct = await Product.update(
+        'description',
+        description,
+        id,
+        userId
+      );
+    }
+
+    return res.redirect(`/admin/edit-product/${id}`);
+  }
 };

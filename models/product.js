@@ -14,6 +14,16 @@ module.exports = class Product {
       [this.title, this.price, this.description, this.imageUrl, this.author]
     );
   }
+
+  static update(property, value, id, userId) {
+    return db.execute(
+      'UPDATE products SET ' +
+        property +
+        ' = ? WHERE products.id = ? AND products.author = ?',
+      [value, id, userId]
+    );
+  }
+
   static fetchAll() {
     return db.execute('SELECT * FROM products');
   }
