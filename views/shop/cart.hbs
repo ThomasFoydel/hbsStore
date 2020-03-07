@@ -10,12 +10,14 @@
 </head>
 
 <body>
-
+    <h1 class="cart-title text-center">{{pageTitle}}</h1>
     {{#if hasItems}}
     <div class="cart">
         {{#each cartItems}}
         <div class="cart-item">
-            <h2>{{title}}</h2>
+            <a href="/shop/product/{{product}}">
+                <h2>{{title}}</h2>
+            </a>
 
             <img src={{imageUrl}} class="cart-item-img">
             <p>quantity: {{quantity}}</p>

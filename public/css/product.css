@@ -23,6 +23,20 @@
   text-align: center;
 }
 
+.product-title-large {
+  text-align: center;
+  font-size: 10rem;
+  letter-spacing: 1.4rem;
+  margin-left: -1.4rem;
+}
+@media (max-width: 1000px) {
+  .product-title-large {
+    font-size: 6.5rem;
+    letter-spacing: 1rem;
+    margin-left: -1rem;
+  }
+}
+
 .product__price {
   text-align: center;
   color: #222222;

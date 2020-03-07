@@ -13,7 +13,8 @@ exports.quantifyCart = function(cart) {
         imageUrl: item.imageUrl,
         seller: item.seller,
         quantity: 1,
-        totalPrice: item.price
+        totalPrice: item.price,
+        title: item.title
       });
     } else {
       let filteredCart = quantifiedCart.filter(element => {
@@ -29,7 +30,8 @@ exports.quantifyCart = function(cart) {
         imageUrl: item.imageUrl,
         seller: item.seller,
         quantity: newQuantity,
-        totalPrice: item.price * newQuantity
+        totalPrice: item.price * newQuantity,
+        title: item.title
       };
       let arrayWithoutNewItem = quantifiedCart.filter(i => {
         return i.product !== item.product;

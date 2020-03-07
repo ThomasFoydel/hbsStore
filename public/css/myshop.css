@@ -199,10 +199,12 @@
   overflow-x: hidden;
   height: 65%;
   width: 80%;
-  max-width: 100vw;
+  width: 60vw;
   position: fixed;
   grid-template-columns: repeat(2, 1fr);
+  margin-left: 0.5rem;
   padding-top: 4rem;
+  left: 0;
 }
 
 .myshop-productspace {
@@ -243,6 +245,7 @@
   .myshop-products-section {
     grid-template-columns: repeat(1, 1fr);
     width: 100vw;
+    margin-left: 0rem;
   }
   .myshop-noproducts {
     margin-left: 0;
