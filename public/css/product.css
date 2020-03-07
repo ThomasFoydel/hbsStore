@@ -29,6 +29,11 @@
   text-align: center;
 }
 
+.product-title-medium {
+  font-size: 4.5rem;
+  text-align: center;
+}
+
 .product-title-large {
   text-align: center;
   font-size: 10rem;

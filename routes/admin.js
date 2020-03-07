@@ -29,8 +29,8 @@ router.post('/add-product', adminController.postAddProduct);
 // /admin/products => GET
 router.get('/products', adminController.getProducts);
 
-// /admin/myshop => GET
-router.get('/myshop', adminController.getMyShop);
+// /admin/my-shop => GET
+router.get('/my-shop', adminController.getMyShop);
 
 // /admin/edit-shop => GET
 router.get('/edit-shop', adminController.getEditShop);

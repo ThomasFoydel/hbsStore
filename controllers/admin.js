@@ -199,10 +199,10 @@ exports.getEditShop = async (req, res) => {
   User.findById(userId).then(response => {
     const foundUser = response[0][0];
     const { name, email, shopTitle, coverPic, profilePic, bio } = foundUser;
-    res.render('admin/editshop', {
+    res.render('admin/edit-shop', {
       isLoggedIn: isLoggedIn,
       pageTitle: 'Edit Shop',
-      path: '/admin/editshop',
+      path: '/admin/edit-shop',
       userId: userId,
       name: name,
       email: email,
@@ -222,10 +222,10 @@ exports.postEditShop = async (req, res) => {
     User.findById(userId).then(response => {
       const foundUser = response[0][0];
       const { name, email, shopTitle, coverPic, profilePic, bio } = foundUser;
-      res.render('admin/editshop', {
+      res.render('admin/edit-shop', {
         isLoggedIn: isLoggedIn,
         pageTitle: 'Edit Shop',
-        path: '/admin/editshop',
+        path: '/admin/edit-shop',
         userId: userId,
         name: name,
         email: email,
