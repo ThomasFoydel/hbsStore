@@ -23,7 +23,7 @@ exports.getCart = async (req, res) => {
         cartItems: []
       });
     }
-    //
+
     // cart not empty
 
     const quantifiedCart = quantifyCart(userCart);
@@ -36,8 +36,8 @@ exports.getCart = async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       success_url:
-        'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/cancel'
+        'http://localhost:3000/shop/checkout-success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:3000/shop/cart'
     });
     // console.log(stripeSession);
 
@@ -360,3 +360,18 @@ exports.checkout = async (req, res) => {
 
 // return res.redirect('/shop/cart');
 // };
+
+exports.getCheckoutSuccess = (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+  const { session_id } = req.query;
+  console.log('get checkout success');
+  console.log('getCheckoutSuccess session_id: ', session_id);
+  return res.render('shop/checkout-success', {
+    isLoggedIn: isLoggedIn,
+    pageTitle: 'Checkout Success',
+    path: '/shop/checkout-success',
+    activeCart: true,
+    hasItems: false,
+    cartItems: []
+  });
+};

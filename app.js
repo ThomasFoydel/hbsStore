@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const expressHbs = require('express-handlebars');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
+const cors = require('cors');
 
 const errorController = require('./controllers/404');
 const db = require('./util/database');
@@ -14,6 +15,8 @@ require('dotenv').config({
 });
 
 const app = express();
+
+app.use(cors());
 
 app.engine(
   'hbs',

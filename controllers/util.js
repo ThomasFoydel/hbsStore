@@ -44,17 +44,14 @@ exports.quantifyCart = function(cart) {
 };
 
 exports.makeLineItems = quantifiedCart => {
-  console.log('make line items makeLineItems quanitified cart: ');
-
   const lineItems = quantifiedCart.map(item => {
     return {
       name: item.title,
-      images: [item.imageUrl],
+      images: [],
       amount: item.price,
       currency: 'usd',
       quantity: item.quantity
     };
   });
-
   return lineItems;
 };

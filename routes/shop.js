@@ -18,4 +18,6 @@ router.post('/remove-from-cart/:cartitemid', shopController.removeFromCart);
 
 router.post('/checkout', shopController.checkout);
 
+router.get('/checkout-success', shopController.getCheckoutSuccess);
+
 module.exports = router;
