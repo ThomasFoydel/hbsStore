@@ -3,7 +3,8 @@ const CartItem = require('../models/cartItem');
 const Product = require('../models/product');
 const User = require('../models/user');
 const Order = require('../models/order');
-const { quantifyCart } = require('./util');
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const { quantifyCart, makeLineItems } = require('./util');
 
 exports.getCart = async (req, res) => {
   const { isLoggedIn, userId } = req.session;
@@ -22,16 +23,33 @@ exports.getCart = async (req, res) => {
         cartItems: []
       });
     }
-
+    //
     // cart not empty
+
     const quantifiedCart = quantifyCart(userCart);
+
+    const lineItems = makeLineItems(quantifiedCart);
+
+    // make stripe session id
+
+    const stripeSession = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: lineItems,
+      success_url:
+        'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:3000/cancel'
+    });
+    // console.log(stripeSession);
+
     res.render('shop/cart', {
       isLoggedIn: isLoggedIn,
       pageTitle: 'Cart',
       path: '/shop/cart',
       activeCart: true,
       hasItems: true,
-      cartItems: quantifiedCart
+      cartItems: quantifiedCart,
+      stripeKey: process.env.STRIPE_API,
+      stripeSession: stripeSession
     });
   } else {
     res.redirect('/admin/login');
@@ -108,79 +126,6 @@ exports.removeFromCart = (req, res) => {
     });
 };
 
-exports.checkout = async (req, res) => {
-  const { userId } = req.session;
-  const response = await CartItem.findByUser(userId);
-  const userCart = response[0];
-
-  // sort cartitems by seller,
-  let mostRecentSeller = '';
-  let fullOrderArray = [];
-
-  const quantifiedCart = quantifyCart(userCart);
-
-  quantifiedCart.forEach((item, i) => {
-    if (item.seller !== mostRecentSeller) {
-      // new seller
-      mostRecentSeller = item.seller;
-
-      fullOrderArray.push({
-        customer: item.customer,
-        seller: item.seller,
-        count: 1,
-        totalPrice: item.price * item.quantity,
-        quantifiedProducts: [item]
-      });
-    } else {
-      // new quantified product from same seller
-      const existingOrderInArrayForm = fullOrderArray.filter(
-        order => order.seller === item.seller
-      );
-      const existingOrder = existingOrderInArrayForm[0];
-      existingOrder.quantifiedProducts.push(item);
-      existingOrder.totalPrice =
-        existingOrder.totalPrice + item.price * item.quantity;
-      existingOrder.count = existingOrder.count + 1;
-    }
-  });
-
-  async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array);
-    }
-  }
-
-  const createOrdersInDataBasePromise = orderObject =>
-    new Promise((resolve, reject) => {
-      const { seller, totalPrice, quantifiedProducts } = orderObject;
-
-      const newOrder = new Order(
-        req.session.userId,
-        seller,
-        totalPrice,
-        JSON.stringify(quantifiedProducts),
-        'pending'
-      );
-
-      newOrder
-        .save()
-        .then(result => {
-          return resolve(result);
-        })
-        .catch(err => console.log('err: ', err));
-    });
-
-  const start = async () => {
-    await asyncForEach(fullOrderArray, async orderObject => {
-      await createOrdersInDataBasePromise(orderObject);
-    });
-
-    CartItem.clearCart(userId);
-    res.redirect('/');
-  };
-  start();
-};
-
 exports.getProduct = async (req, res) => {
   const { isLoggedIn } = req.session;
   const productResponseFromDb = await Product.findById(req.params.id);
@@ -223,3 +168,195 @@ exports.getStore = async (req, res) => {
     bio
   });
 };
+
+exports.checkout = async (req, res) => {
+  const { userId, isLoggedIn } = req.session;
+  const { fullName, address } = req.body;
+  if (fullName && address) {
+    const response = await CartItem.findByUser(userId);
+    const userCart = response[0];
+
+    // sort cartitems by seller,
+    let mostRecentSeller = '';
+    let fullOrderArray = [];
+
+    const quantifiedCart = quantifyCart(userCart);
+
+    quantifiedCart.forEach((item, i) => {
+      if (item.seller !== mostRecentSeller) {
+        // new seller
+        mostRecentSeller = item.seller;
+
+        fullOrderArray.push({
+          customer: item.customer,
+          seller: item.seller,
+          count: 1,
+          totalPrice: item.price * item.quantity,
+          quantifiedProducts: [item]
+        });
+      } else {
+        // new quantified product from same seller
+        const existingOrderInArrayForm = fullOrderArray.filter(
+          order => order.seller === item.seller
+        );
+        const existingOrder = existingOrderInArrayForm[0];
+        existingOrder.quantifiedProducts.push(item);
+        existingOrder.totalPrice =
+          existingOrder.totalPrice + item.price * item.quantity;
+        existingOrder.count = existingOrder.count + 1;
+      }
+    });
+
+    async function asyncForEach(array, callback) {
+      for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+      }
+    }
+
+    const createOrdersInDataBasePromise = orderObject =>
+      new Promise((resolve, reject) => {
+        const { seller, totalPrice, quantifiedProducts } = orderObject;
+
+        const newOrder = new Order(
+          req.session.userId,
+          seller,
+          totalPrice,
+          JSON.stringify(quantifiedProducts),
+          'pending',
+          JSON.stringify({ fullName: fullName, address: address })
+        );
+
+        newOrder
+          .save()
+          .then(result => {
+            return resolve(result);
+          })
+          .catch(err => console.log('err: ', err));
+      });
+
+    const start = async () => {
+      await asyncForEach(fullOrderArray, async orderObject => {
+        await createOrdersInDataBasePromise(orderObject);
+      });
+
+      // CartItem.clearCart(userId);
+      res.render('shop/checkout', {
+        isLoggedIn: isLoggedIn,
+        pageTitle: 'Checkout',
+        path: '/shop/checkout',
+
+        productCSS: true,
+        authorName: foundUser.name,
+        author: foundUser.id
+      });
+    };
+    start();
+  } else {
+    console.log('NEGATIVE!');
+  }
+};
+
+// exports.charge = async (req, res) => {
+//   const { userId, isLoggedIn } = req.session;
+//   const response = await CartItem.findByUser(userId);
+//   const userCart = response[0];
+
+//   // sort cartitems by seller,
+//   let mostRecentSeller = '';
+//   let fullOrderArray = [];
+
+//   const quantifiedCart = quantifyCart(userCart);
+
+//   const lineItems = makeLineItems(quantifiedCart);
+
+//   (async () => {
+//     const session = await stripe.checkout.sessions.create({
+//       payment_method_types: ['card'],
+//       line_items: [
+//         {
+//           name: 'T-shirt',
+//           description: 'Comfortable cotton t-shirt',
+//           images: ['https://example.com/t-shirt.png'],
+//           amount: 500,
+//           currency: 'usd',
+//           quantity: 1
+//         }
+//       ],
+//       success_url: '/success?session_id={CHECKOUT_SESSION_ID}',
+//       cancel_url: '/cancel'
+//     });
+//   })();
+
+//   quantifiedCart.forEach((item, i) => {
+//     if (item.seller !== mostRecentSeller) {
+//       // new seller
+//       mostRecentSeller = item.seller;
+
+//       fullOrderArray.push({
+//         customer: item.customer,
+//         seller: item.seller,
+//         count: 1,
+//         totalPrice: item.price * item.quantity,
+//         quantifiedProducts: [item]
+//       });
+//     } else {
+//       // new quantified product from same seller
+//       const existingOrderInArrayForm = fullOrderArray.filter(
+//         order => order.seller === item.seller
+//       );
+//       const existingOrder = existingOrderInArrayForm[0];
+//       existingOrder.quantifiedProducts.push(item);
+//       existingOrder.totalPrice =
+//         existingOrder.totalPrice + item.price * item.quantity;
+//       existingOrder.count = existingOrder.count + 1;
+//     }
+//   });
+
+//   async function asyncForEach(array, callback) {
+//     for (let index = 0; index < array.length; index++) {
+//       await callback(array[index], index, array);
+//     }
+//   }
+
+//   const createOrdersInDataBasePromise = orderObject =>
+//     new Promise((resolve, reject) => {
+//       const { seller, totalPrice, quantifiedProducts } = orderObject;
+
+//       const newOrder = new Order(
+//         req.session.userId,
+//         seller,
+//         totalPrice,
+//         JSON.stringify(quantifiedProducts),
+//         'pending',
+//         JSON.stringify({ fullName: fullName, address: address })
+//       );
+
+//       newOrder
+//         .save()
+//         .then(result => {
+//           return resolve(result);
+//         })
+//         .catch(err => console.log('err: ', err));
+//     });
+
+//   const start = async () => {
+//     await asyncForEach(fullOrderArray, async orderObject => {
+//       await createOrdersInDataBasePromise(orderObject);
+//     });
+
+//     // // CartItem.clearCart(userId);
+//     // res.render('shop/checkout', {
+//     //   isLoggedIn: isLoggedIn,
+//     //   pageTitle: 'Checkout',
+//     //   path: '/shop/checkout',
+
+//     //   productCSS: true,
+//     //   authorName: foundUser.name,
+//     //   author: foundUser.id
+//     // });
+//   };
+//   // UNCOMMENT THIS TO ACTIVATE THE ABOVE ^^
+//   // start();
+
+// return res.redirect('/shop/cart');
+// };

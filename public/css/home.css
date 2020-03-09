@@ -16,10 +16,10 @@
 }
 
 .home-textbox {
-  background: rgba(29, 29, 29, 0.536);
+  background: rgba(29, 29, 29, 0.6);
   backdrop-filter: blur(6px);
-  box-shadow: 3rem 3rem 10rem rgba(255, 255, 255, 0.24),
-    -3rem -3rem 10rem rgba(255, 255, 255, 0.24);
+  box-shadow: 3rem 3rem 6rem rgba(255, 255, 255, 0.14),
+    -3rem -3rem 6rem rgba(255, 255, 255, 0.14);
   color: white;
   height: 300px;
   width: 65%;
@@ -27,7 +27,7 @@
   margin-top: 19rem;
   transform: translateX(-50%) translateY(-50%);
   padding: 3rem 1.8rem;
-  border-radius: 2px;
+  border-radius: 4px;
   text-align: center;
   font-size: 1.5rem;
   min-width: 30rem;

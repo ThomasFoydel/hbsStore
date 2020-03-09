@@ -13,17 +13,18 @@
 
     {{#each orders}}
     <div class="order">
-        <h2 class="center">price: ${{price}}</h2>
+        <h6>{{shippingInfo.fullName}}</h6>
+        <h6>{{shippingInfo.address}}</h6>
+        <h6>total price: ${{price}}</h6>
 
         Products:
         {{#each products}}
         <div class="orders-product center">
             <p class="center">quantity: {{quantity}}</p>
-            <p class="center">total price: ${{totalPrice}}</p>
+            <p class="center">price: ${{totalPrice}}</p>
             <img class="orders-product-img" src="{{imageUrl}}">
         </div>
         {{/each}}
-
 
     </div>
     {{/each}} {{else}} <h2>no outstanding orders</h2>

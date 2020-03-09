@@ -2,6 +2,7 @@
   background: #ddd;
   padding: 1rem;
   width: 16rem;
+  margin: 1rem;
 }
 
 .orders-product-img {
@@ -12,4 +13,5 @@
   background: white;
   padding: 1rem 0;
   width: 14rem;
+  margin-bottom: 0.5rem;
 }

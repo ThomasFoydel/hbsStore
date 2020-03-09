@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{pageTitle}}</title>
     <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
@@ -33,12 +35,46 @@
     </div>
     <div class="checkout-container">
         <form class="checkout" action="/shop/checkout" method="POST">
-            <button type="submit" class="btn checkout-button">check out</button>
+            <div class="form-control">
+                <input class="center mb-2" placeholder="full name" type="text" name="fullName" id="fullName">
+                <input class="center" placeholder="address" type="text" name="address" id="address">
+            </div>
+            <button {{!-- type="submit" --}} id="checkout-button" class="btn checkout-button">check out</button>
+            <h2 id="errorMessage"></h2>
         </form>
     </div>
     {{else}}
-    <h1>your cart is empty</h1>
+    <h1 class="center">your cart is empty</h1>
     {{/if}}
+
+    <script>
+        const stripe = window.Stripe("{{ stripeKey }}");
+        const stripeSessionId = "{{ stripeSession.id }}";
+
+        const submitButton = document.querySelector("#checkout-button");
+        submitButton.addEventListener("click", () => {
+            stripe
+                .redirectToCheckout({
+                    // Make the id field from the Checkout Session creation API response
+                    // available to this file, so you can provide it as parameter here
+                    // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                    sessionId: stripeSessionId
+                })
+                .then(function (result) {
+                    console.log('STRIPE REDIRECT RESULT: ', result);
+                    if (result.error.message) {
+                        const errorEl = document.querySelector("#errorMessage");
+                        errorEl.innerHTML = result.error.message;
+                    }
+                    // If `redirectToCheckout` fails due to a browser or network
+                    // error, display the localized error message to your customer
+                    // using `result.error.message`.
+                });
+        })
+
+
+
+    </script>
 
 </body>
 

@@ -42,3 +42,19 @@ exports.quantifyCart = function(cart) {
   });
   return quantifiedCart;
 };
+
+exports.makeLineItems = quantifiedCart => {
+  console.log('make line items makeLineItems quanitified cart: ');
+
+  const lineItems = quantifiedCart.map(item => {
+    return {
+      name: item.title,
+      images: [item.imageUrl],
+      amount: item.price,
+      currency: 'usd',
+      quantity: item.quantity
+    };
+  });
+
+  return lineItems;
+};

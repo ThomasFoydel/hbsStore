@@ -336,7 +336,7 @@ exports.getOrders = async (req, res) => {
 
   const orderDbResponse = await Order.findBySeller(userId);
   const ordersArray = orderDbResponse[0];
-  // console.log(ordersArray[0].products);
+  console.log(ordersArray[1]);
   res.render('admin/orders', {
     isLoggedIn: isLoggedIn,
     pageTitle: 'Orders',
