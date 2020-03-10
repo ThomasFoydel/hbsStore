@@ -3,26 +3,22 @@
 not up and running yet!
 current objectives:
 
-### build out auth flow / login
-
-- auth flow that used ajax call to fetch jwt and store jwt in localStorage involved putting too much logic into the handlebars templates / seemed to go against MVC pattern, which is supposed to be the spirit of this project
-- switched to express-session instead
-- store sessions in Google Cloud MySQL
-
-### user profile info
-
-- location
-- profile picture
-- crop and minimize
-- bio
-
-### cart
-
-- added imageUrl and price to cartItem
-
 ### payment
 
 - stripe
+
+1. user views products page or store page
+2. user clicks add to cart
+3. item goes into cart, redirect to cart page
+4. user clicks checkout button
+5. ?? create orders here, using the session id, then wait until session id is sent to the success route by stripe webhook ??
+6. line items created from cart and passed into stripe redirect, cart page redirects to stripe charge page,
+7. user completes payments
+8. stripe uses webhook to hit page where order objects are created from cartitems (current logic in shop/checkout)
+9. route searches for all orders matching the route, change status to "pending"
+10. seller uploads tracking number, set order.status to “tracking”
+
+deploy to heroku or use stripe cli to test webhook?
 
 ### orders
 

@@ -34,12 +34,12 @@
         {{/each}}
     </div>
     <div class="checkout-container">
-        <form class="checkout" action="/shop/checkout" method="POST">
+        <form class="checkout" {{!-- action="/shop/checkout" method="POST" --}}>
             <div class="form-control">
                 <input class="center mb-2" placeholder="full name" type="text" name="fullName" id="fullName">
                 <input class="center" placeholder="address" type="text" name="address" id="address">
             </div>
-            <button {{!-- type="submit" --}} id="checkout-button" class="btn checkout-button">check out</button>
+            <button id="checkout-button" class="btn checkout-button">check out</button>
             <h2 id="errorMessage"></h2>
         </form>
     </div>
@@ -51,25 +51,38 @@
         const stripe = window.Stripe("{{ stripeKey }}");
         const stripeSessionId = "{{ stripeSession.id }}";
 
+
+
+
+
         const submitButton = document.querySelector("#checkout-button");
-        submitButton.addEventListener("click", () => {
-            stripe
-                .redirectToCheckout({
-                    // Make the id field from the Checkout Session creation API response
-                    // available to this file, so you can provide it as parameter here
-                    // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-                    sessionId: stripeSessionId
-                })
-                .then(function (result) {
-                    console.log('STRIPE REDIRECT RESULT: ', result);
-                    if (result.error.message) {
-                        const errorEl = document.querySelector("#errorMessage");
-                        errorEl.innerHTML = result.error.message;
-                    }
-                    // If `redirectToCheckout` fails due to a browser or network
-                    // error, display the localized error message to your customer
-                    // using `result.error.message`.
-                });
+        submitButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            const fullNameInput = document.querySelector("#fullName").value;
+            const addressInput = document.querySelector("#address").value;
+            console.log("fullNameInput: ", fullNameInput);
+            console.log("addressInput: ", addressInput);
+
+            if (true) {
+
+                stripe
+                    .redirectToCheckout({
+                        // Make the id field from the Checkout Session creation API response
+                        // available to this file, so you can provide it as parameter here
+                        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                        sessionId: stripeSessionId
+                    })
+                    .then(function (result) {
+                        console.log('STRIPE REDIRECT RESULT: ', result);
+                        if (result.error.message) {
+                            const errorEl = document.querySelector("#errorMessage");
+                            errorEl.innerHTML = result.error.message;
+                        }
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer
+                        // using `result.error.message`.
+                    });
+            }
         })
 
 

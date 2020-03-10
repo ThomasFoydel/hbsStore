@@ -16,7 +16,9 @@ router.post('/add-to-cart/:productid', shopController.addToCart);
 
 router.post('/remove-from-cart/:cartitemid', shopController.removeFromCart);
 
-router.post('/checkout', shopController.checkout);
+// router.post('/checkout', shopController.checkout);
+
+router.get('/checkout', shopController.getCheckout);
 
 router.get('/checkout-success', shopController.getCheckoutSuccess);
 
