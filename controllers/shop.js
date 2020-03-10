@@ -36,8 +36,8 @@ exports.getCart = async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       success_url:
-        'http://localhost:3000/shop/checkout-success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/shop/cart'
+        'http://handlebars-store.herokuapp.com/shop/checkout-success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://handlebars-store.herokuapp.com/shop/cart'
     });
     // console.log(stripeSession);
 
