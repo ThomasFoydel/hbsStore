@@ -84,4 +84,4 @@ app.use('/', (req, res) => {
 
 app.use(errorController.getPageNotFound);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
