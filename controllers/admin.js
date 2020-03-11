@@ -118,7 +118,7 @@ exports.postLogin = async (req, res) => {
         formCSS: true,
         activeLogin: true,
         emailError: true,
-        errorMessage: error
+        err: error
       });
     });
 };
