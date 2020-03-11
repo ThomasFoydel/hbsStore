@@ -79,15 +79,26 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = async (req, res) => {
   const { email, password } = req.body;
-  User.findByEmail(email).then(async response => {
-    if (response[0][0]) {
-      const user = response[0][0];
-      const passwordsMatch = await bcrypt.compare(password, user.password);
-      if (passwordsMatch) {
-        req.session.isLoggedIn = true;
-        req.session.userId = user.id;
-        req.session.name = user.name;
-        res.redirect('/');
+  User.findByEmail(email)
+    .then(async response => {
+      if (response[0][0]) {
+        const user = response[0][0];
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        if (passwordsMatch) {
+          req.session.isLoggedIn = true;
+          req.session.userId = user.id;
+          req.session.name = user.name;
+          res.redirect('/');
+        } else {
+          return res.render('admin/login', {
+            isLoggedIn: false,
+            pageTitle: 'Login',
+            path: '/admin/login',
+            formCSS: true,
+            activeLogin: true,
+            passwordError: true
+          });
+        }
       } else {
         return res.render('admin/login', {
           isLoggedIn: false,
@@ -95,20 +106,21 @@ exports.postLogin = async (req, res) => {
           path: '/admin/login',
           formCSS: true,
           activeLogin: true,
-          passwordError: true
+          emailError: true
         });
       }
-    } else {
+    })
+    .catch(error => {
       return res.render('admin/login', {
         isLoggedIn: false,
         pageTitle: 'Login',
         path: '/admin/login',
         formCSS: true,
         activeLogin: true,
-        emailError: true
+        emailError: true,
+        errorMessage: error
       });
-    }
-  });
+    });
 };
 
 exports.postLogout = (req, res) => {
