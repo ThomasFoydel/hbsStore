@@ -20,6 +20,9 @@ current objectives:
 
 deploy to heroku or use stripe cli to test webhook?
 
+need proxy to access gcloud mysql database from external application
+deploy to gcloud, might make more sense than heroku?
+
 ### orders
 
 - asynchronous forEach version worked out
